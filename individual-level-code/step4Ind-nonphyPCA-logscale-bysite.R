@@ -14,7 +14,7 @@ library(FactoMineR) # perform PCA analysis
 library(patchwork) # plot merging
 library(cowplot) # plot merging
 
-load("2502-indv-level-code/traitDataFujian-Ind-step1.RData")
+load("individual-level-code/traitDataFujian-Ind-step1.RData")
 
 .is_grouping_var <- function(x) {length(x) > 1 & (is.character(x) | is.factor(x))}
 .is_continuous_var <- function(x) {x[1] %in% c("cos2", "contrib", "x", "y") | is.numeric(x)}
@@ -71,13 +71,22 @@ fviz_pca_biplot_MODIFIED <- function (X, axes = c(1, 2), geom = c("point", "text
   p
 }
 
+
 ### SET DATA TO USE ### 
 # TODO: perform scaling later (line 36, 27/12-24)
 traitDataPCA_touse = traitDataIndv_SelectedTraits_log # perform scaling later (line 36, 27/12-24)
 
 ### SET TRAITS TO USE###
-# All traits, need to be log transformed and scaled 
-traitName_touse = c("RTD","SRL","RD","RNC","LMA","LNC")
+
+## Fine root trait space (Figure 2)
+#traitName_touse = c("RTD","SRL","RD","RNC","RDMC","SRR25","SRA","RPC","RCC")
+
+## Leaf trait space (Figure 2)
+#traitName_touse = c("LMA","LNC","LPC","LCC","Ld13C","Rdark25P","Vcmax25","Asat","LA")
+
+# Markers and identified co-predictors, leaf+root (Figure 2)
+traitName_touse = c("RTD","SRL","RD","RNC","LMA","LNC","RDMC","SRR25","SRA","LPC")
+
 
 # Resolve problem: non-unique values when setting 'row.names': ‘Castanopsis fordii’, ‘Machilus pauhoi’ 
 # because of sp-gf averaging
@@ -123,7 +132,7 @@ nonphyloPCAresult_varimax_rotated$ind$coord <- rotated_scores
 # Scree plot: contributions of axes
 # ------------------------------------------------------------------------------
 nonphyloPCA.screeplot = fviz_screeplot(
-  nonphyloPCAresult, addlabels = TRUE, ylim = c(0, 40),
+  nonphyloPCAresult, addlabels = TRUE, ylim = c(0, 37),
   barfill="#7998AD", barcolor="#7998AD", linecolor="black") +
   labs(title="R-LES") + theme_classic()
 
@@ -157,7 +166,7 @@ plt_nonphyloPCA_biplot_ax12 = fviz_pca_biplot_MODIFIED(
   # addEllipses=T, palette = c("#8583A9", "#A0BDD5", "#CA8BA8")) + # liana, shrub, tree
   addEllipses=T, palette = c("#547bb4", "#dd7c4f")) + # hilltop,valley
   #annotate("text", x = -2.5, y = 3.8, label=paste0("Top ", length(traitName_touse)-2), color = "black") + 
-  labs(title = "") + theme_classic() + theme(legend.direction = 'horizontal', legend.position = 'none', legend.title = element_blank()) + xlim(-4.5, 4.5) + ylim(-4.5, 4.5)
+  labs(title = "") + theme_classic() + theme(legend.direction = 'horizontal', legend.position = 'none', legend.title = element_blank()) + xlim(-5, 5) + ylim(-5, 5)
 
 
 plt_nonphyloPCA_biplot_ax23 = fviz_pca_biplot_MODIFIED(
@@ -172,7 +181,7 @@ plt_nonphyloPCA_biplot_ax23 = fviz_pca_biplot_MODIFIED(
   # addEllipses=T, palette = c("#8583A9", "#A0BDD5", "#CA8BA8")) + # liana, shrub, tree
   addEllipses=T, palette = c("#547bb4", "#dd7c4f")) + # hilltop, valley
   #annotate("text", x = -2.5, y = 3.8, label=paste0("Top ", length(traitName_touse)-2), color = "black") + 
-  labs(title = "") + theme_classic() + theme(legend.direction = 'horizontal', legend.position = 'none', legend.title = element_blank()) + xlim(-4.5, 4.5) + ylim(-4.5, 4.5)
+  labs(title = "") + theme_classic() + theme(legend.direction = 'horizontal', legend.position = 'none', legend.title = element_blank()) + xlim(-5, 5) + ylim(-5, 5)
 
 
 plt_nonphyloPCA_biplot_ax12.varimax = fviz_pca_biplot_MODIFIED(
@@ -187,7 +196,7 @@ plt_nonphyloPCA_biplot_ax12.varimax = fviz_pca_biplot_MODIFIED(
   # addEllipses=T, palette = c("#8583A9", "#A0BDD5", "#CA8BA8")) + # liana, shrub, tree
   addEllipses=T, palette = c("#547bb4", "#dd7c4f")) + # hilltop,valley
   #annotate("text", x = -2.5, y = 3.8, label=paste0("Top ", length(traitName_touse)-2), color = "black") + 
-  labs(title = "") + theme_classic() + theme(legend.direction = 'horizontal', legend.position = 'none', legend.title = element_blank()) + xlim(-4.5, 4.5) + ylim(-4.5, 4.5)
+  labs(title = "") + theme_classic() + theme(legend.direction = 'horizontal', legend.position = 'none', legend.title = element_blank()) + xlim(-5, 5) + ylim(-5, 5)
 
 
 plt_nonphyloPCA_biplot_ax23.varimax = fviz_pca_biplot_MODIFIED(
@@ -202,20 +211,18 @@ plt_nonphyloPCA_biplot_ax23.varimax = fviz_pca_biplot_MODIFIED(
   # addEllipses=T, palette = c("#8583A9", "#A0BDD5", "#CA8BA8")) + # liana, shrub, tree
   addEllipses=T, palette = c("#547bb4", "#dd7c4f")) + # hilltop, valley
   #annotate("text", x = -2.5, y = 3.8, label=paste0("Top ", length(traitName_touse)-2), color = "black") + 
-  labs(title = "") + theme_classic() + theme(legend.direction = 'horizontal', legend.position = 'none', legend.title = element_blank()) + xlim(-4.5, 4.5) + ylim(-4.5, 4.5)
+  labs(title = "") + theme_classic() + theme(legend.direction = 'horizontal', legend.position = 'none', legend.title = element_blank()) + xlim(-5, 5) + ylim(-5, 5)
 
 
-# Save plot after merging ------------------------------------------------------
-plt_bi_ax123 = plt_nonphyloPCA_biplot_ax12 / plt_nonphyloPCA_biplot_ax23 + 
-  #plot_annotation(title = "PC2-3, biplot and contribution plot") +
+
+# TODO: 25-02-01, extract contrib and cos2 in numbers
+#plt_nonphyloPCA_contribplot_ax12[["data"]] %>% view()
+#plt_nonphyloPCA_contribplot_ax23[["data"]] %>% view()
+nonphyloPCAresult_varimax_rotated[["var"]][["coord"]] %>% view()
+
+
+# Make the output plot
+plt_ax123_bi_varimax = plt_nonphyloPCA_biplot_ax12.varimax + plt_nonphyloPCA_biplot_ax23.varimax +
   plot_layout(guides = "collect") & theme(legend.position='bottom')
-
-ggsave(plot = plt_bi_ax123, filename = "2502-indv-level-code/IndSite_nonphyPCA_ax123_RLES.pdf",
-       width = 2.8, height = 6.2)
-
-# plt_bi_ax123.varimax = plt_nonphyloPCA_biplot_ax12.varimax / plt_nonphyloPCA_biplot_ax23.varimax + 
-#   #plot_annotation(title = "PC2-3, biplot and contribution plot") +
-#   plot_layout(guides = "collect") & theme(legend.position='bottom')
-# 
-# ggsave(plot = plt_bi_ax123.varimax, filename = "2502-indv-level-code/IndSite_nonphyPCA_ax123_RLES.varimax.pdf",
-#        width = 2.5, height = 5.5)
+ggsave(plot = plt_ax123_bi_varimax, filename = "individual-level-code/Ind_nonphyPCA_bi_varimax.pdf",
+       width = 5.8, height = 3.6)

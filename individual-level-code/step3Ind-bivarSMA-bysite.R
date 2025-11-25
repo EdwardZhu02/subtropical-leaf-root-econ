@@ -14,7 +14,7 @@ library(ggthemes)
 library(patchwork) # plot merging
 library(cowplot) # plot merging
 
-load("2502-indv-level-code/traitDataFujian-Ind-step1.RData")
+load("individual-level-code/traitDataFujian-Ind-step1.RData")
 
 ### SET DATA TO USE ###
 traitData_touse = traitDataIndv_SelectedTraits_log
@@ -147,7 +147,7 @@ smaplt.LNC_LMA = ggplot(smaplt_total_data, aes(x=LMA, y=LNC)) +
   scale_color_manual(values = c("#547bb4", "#dd7c4f")) + 
   annotate("text", x = 0.008, y = 1.18, label = model.sma.LNC_LMA_annotlabel, hjust = 0, vjust = 1, size = 3.2)
 
-ggsave(plot = smaplt.LNC_LMA, filename = "2502-indv-level-code/IndSites_sma.LNC_LMA.pdf", width = 2.8, height = 2.8)
+ggsave(plot = smaplt.LNC_LMA, filename = "individual-level-code/IndSites_sma.LNC_LMA.pdf", width = 2.8, height = 2.8)
 
 
 # PART 2: RES collaboration (RD-SRL) ----
@@ -270,7 +270,7 @@ smaplt.RD_SRL = ggplot(smaplt_total_data, aes(x=SRL, y=RD)) +
   scale_color_manual(values = c("#547bb4", "#dd7c4f")) +
   annotate("text", x = 3.6, y = 0.53, label = model.sma.RD_SRL_annotlabel, hjust = 0, vjust = 1, size = 3.2)
 
-ggsave(plot = smaplt.RD_SRL, filename = "2502-indv-level-code/IndSites_sma.RD_SRL.pdf", width = 2.8, height = 2.8)
+ggsave(plot = smaplt.RD_SRL, filename = "individual-level-code/IndSites_sma.RD_SRL.pdf", width = 2.8, height = 2.8)
 
 
 # PART 3: RES conservation (RNC-RTD) ----
@@ -393,7 +393,7 @@ smaplt.RNC_RTD = ggplot(smaplt_total_data, aes(x=RTD, y=RNC)) +
   scale_color_manual(values = c("#547bb4", "#dd7c4f")) +
   annotate("text", x = 0.165, y = 1.48, label = model.sma.RNC_RTD_annotlabel, hjust = 0, vjust = 1, size = 3.2)
 
-ggsave(plot = smaplt.RNC_RTD, filename = "2502-indv-level-code/IndSites_sma.RNC_RTD.pdf", width = 2.8, height = 2.8)
+ggsave(plot = smaplt.RNC_RTD, filename = "individual-level-code/IndSites_sma.RNC_RTD.pdf", width = 2.8, height = 2.8)
 
 
 # NEWLY ADDED: LES (LA-Ld13C) ----
@@ -516,7 +516,7 @@ smaplt.Ld13C_LA = ggplot(smaplt_total_data, aes(x=LA, y=Ld13C)) +
   scale_color_manual(values = c("#547bb4", "#dd7c4f")) +
   annotate("text", x = 2.52, y = -3.5, label = model.sma.Ld13C_LA_annotlabel, hjust = 0, vjust = 1, size = 3.2)
 
-ggsave(plot = smaplt.Ld13C_LA, filename = "2502-indv-level-code/IndSites_sma.Ld13C_LA.pdf", width = 2.8, height = 2.8)
+ggsave(plot = smaplt.Ld13C_LA, filename = "individual-level-code/IndSites_sma.Ld13C_LA.pdf", width = 2.8, height = 2.8)
 
 
 # NEWLY ADDED: LES (RCC-Ld13C) ----
@@ -639,7 +639,7 @@ smaplt.Ld13C_RCC = ggplot(smaplt_total_data, aes(x=RCC, y=Ld13C)) +
   scale_color_manual(values = c("#547bb4", "#dd7c4f")) +
   annotate("text", x = 3.9, y = -3.6, label = model.sma.Ld13C_RCC_annotlabel, hjust = 0, vjust = 1, size = 3.2)
 
-ggsave(plot = smaplt.Ld13C_RCC, filename = "2502-indv-level-code/IndSites_sma.Ld13C_RCC.pdf", width = 2.8, height = 2.8)
+ggsave(plot = smaplt.Ld13C_RCC, filename = "individual-level-code/IndSites_sma.Ld13C_RCC.pdf", width = 2.8, height = 2.8)
 
 
 # NEWLY ADDED: LES (RPC-Ld13C) ----
@@ -762,7 +762,7 @@ smaplt.Ld13C_RPC = ggplot(smaplt_total_data, aes(x=RPC, y=Ld13C)) +
   scale_color_manual(values = c("#547bb4", "#dd7c4f")) +
   annotate("text", x = 0.5, y = -3.3, label = model.sma.Ld13C_RPC_annotlabel, hjust = 0, vjust = 1, size = 3.2)
 
-ggsave(plot = smaplt.Ld13C_RPC, filename = "2502-indv-level-code/IndSites_sma.Ld13C_RPC.pdf", width = 2.8, height = 2.8)
+ggsave(plot = smaplt.Ld13C_RPC, filename = "individual-level-code/IndSites_sma.Ld13C_RPC.pdf", width = 2.8, height = 2.8)
 
 
 # NEWLY ADDED: LES (SRR25-Rdark25P) ----
@@ -885,7 +885,7 @@ smaplt.Rdark25P_SRR25 = ggplot(smaplt_total_data, aes(x=SRR25, y=Rdark25P)) +
   scale_color_manual(values = c("#547bb4", "#dd7c4f")) +
   annotate("text", x = 1.2, y = 1.4, label = model.sma.Rdark25P_SRR25_annotlabel, hjust = 0, vjust = 1, size = 3.2)
 
-ggsave(plot = smaplt.Rdark25P_SRR25, filename = "2502-indv-level-code/IndSites_sma.Rdark25P_SRR25.pdf", width = 2.8, height = 2.8)
+ggsave(plot = smaplt.Rdark25P_SRR25, filename = "individual-level-code/IndSites_sma.Rdark25P_SRR25.pdf", width = 2.8, height = 2.8)
 
 
 
@@ -1009,7 +1009,7 @@ smaplt.RNC_LNC = ggplot(smaplt_total_data, aes(x=LNC, y=RNC)) +
   scale_color_manual(values = c("#547bb4", "#dd7c4f")) +
   annotate("text", x = 0.8, y = 1.4, label = model.sma.RNC_LNC_annotlabel, hjust = 0, vjust = 1, size = 3.2)
 
-ggsave(plot = smaplt.RNC_LNC, filename = "2502-indv-level-code/IndSites_sma.RNC_LNC.pdf", width = 2.8, height = 2.8)
+ggsave(plot = smaplt.RNC_LNC, filename = "individual-level-code/IndSites_sma.RNC_LNC.pdf", width = 2.8, height = 2.8)
 
 
 
@@ -1133,4 +1133,4 @@ smaplt.SRL_SLA = ggplot(smaplt_total_data, aes(x=SLA, y=SRL)) +
   scale_color_manual(values = c("#547bb4", "#dd7c4f")) +
   annotate("text", x = 4, y = 5, label = model.sma.SRL_SLA_annotlabel, hjust = 0, vjust = 1, size = 3.2)
 
-ggsave(plot = smaplt.SRL_SLA, filename = "2502-indv-level-code/IndSites_sma.SRL_SLA.pdf", width = 2.8, height = 2.8)
+ggsave(plot = smaplt.SRL_SLA, filename = "individual-level-code/IndSites_sma.SRL_SLA.pdf", width = 2.8, height = 2.8)

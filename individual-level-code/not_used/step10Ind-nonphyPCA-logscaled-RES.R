@@ -14,7 +14,7 @@ library(FactoMineR) # perform PCA analysis
 library(patchwork) # plot merging
 library(cowplot) # plot merging
 
-load("2502-indv-level-code/traitDataFujian-Ind-step1.RData")
+load("individual-level-code/traitDataFujian-Ind-step1.RData")
 
 ### SET DATA TO USE ### 
 # TODO: perform scaling later (line 36, 27/12-24)
@@ -71,7 +71,7 @@ nonphyloPCAresult_varimax_rotated$ind$coord <- rotated_scores
 nonphyloPCA.screeplot = fviz_screeplot(nonphyloPCAresult, addlabels = TRUE, ylim = c(0, 51),
                                        barfill="#A9082C", barcolor="black", linecolor="black") +
   labs(title="R-LES") + theme_classic()
-ggsave(filename = "2502-indv-level-code/Ind_nonphyPCA_scree-RES.pdf", plot = nonphyloPCA.screeplot, width = 2.2, height = 2.5)
+ggsave(filename = "individual-level-code/Ind_nonphyPCA_scree-RES.pdf", plot = nonphyloPCA.screeplot, width = 2.2, height = 2.5)
 
 # ------------------------------------------------------------------------------
 # 2-D PCA biplot: GrowthForm as grouping factor
@@ -112,6 +112,6 @@ plt_ax12 = plt_nonphyloPCA_biplot_ax12 + plt_nonphyloPCA_contribplot_ax12 +
 #plt_nonphyloPCA_contribplot_ax23[["data"]] %>% view()
 
 # Combine the two plots side by side and save
-ggsave(plot = plt_ax12, filename = "2502-indv-level-code/Ind_nonphyPCA_ax12_RES.pdf",
+ggsave(plot = plt_ax12, filename = "individual-level-code/Ind_nonphyPCA_ax12_RES.pdf",
        width = 6.5, height = 3.5)
 

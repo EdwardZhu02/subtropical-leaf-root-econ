@@ -62,7 +62,7 @@ plt_scree_compare = ggplot(screeData_compare_touse) +
 
 plt_scree_compare
 
-ggsave(filename = "2502-indv-level-code/Ind_PCAscree-RLESall.pdf", plot = plt_scree_compare, width = 3.9, height = 3.5)
+ggsave(filename = "individual-level-code/Ind_PCAscree-RLESall.pdf", plot = plt_scree_compare, width = 3.9, height = 3.5)
 #ggsave(filename = "plt_PCAcompare_scree-RESLESLPC.pdf", plot = plt_scree_compare, width = 3.9, height = 3.5)
 #ggsave(filename = "plt_PCAcompare_scree-RESLESRDMC.pdf", plot = plt_scree_compare, width = 3.9, height = 3.5)
 #ggsave(filename = "plt_PCAcompare_scree-RESLESLPCRDMC.pdf", plot = plt_scree_compare, width = 3.9, height = 3.5)

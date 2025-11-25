@@ -14,7 +14,7 @@ library(FactoMineR) # perform PCA analysis
 library(patchwork) # plot merging
 library(cowplot) # plot merging
 
-load("2502-indv-level-code/traitDataFujian-Ind-step1.RData")
+load("individual-level-code/traitDataFujian-Ind-step1.RData")
 
 ### SET DATA TO USE ### 
 # TODO: perform scaling later (line 36, 27/12-24)
@@ -75,7 +75,7 @@ nonphyloPCAresult_varimax_rotated$ind$coord <- rotated_scores
 nonphyloPCA.screeplot = fviz_screeplot(nonphyloPCAresult, addlabels = TRUE, ylim = c(0, 40),
                                        barfill="#7998AD", barcolor="#7998AD", linecolor="black") +
   labs(title="R-LES") + theme_classic()
-ggsave(filename = "2502-indv-level-code/Ind_nonphyPCA_scree-LESall.pdf", plot = nonphyloPCA.screeplot, width = 3, height = 3)
+ggsave(filename = "individual-level-code/Ind_nonphyPCA_scree-LESall.pdf", plot = nonphyloPCA.screeplot, width = 3, height = 3)
 
 # ------------------------------------------------------------------------------
 # 2-D PCA biplot: GrowthForm as grouping factor
@@ -213,10 +213,10 @@ nonphyloPCAresult_varimax_rotated[["var"]][["coord"]] %>% view()
 
 # Combine the two plots side by side and save
 plt_ax12_ax23_combined = plot_grid(plt_ax12, plt_ax23, ncol = 1)
-ggsave(plot = plt_ax12_ax23_combined, filename = "2502-indv-level-code/Ind_nonphyPCA_ax123_LESall.pdf",
+ggsave(plot = plt_ax12_ax23_combined, filename = "individual-level-code/Ind_nonphyPCA_ax123_LESall.pdf",
        width = 7.5, height = 8.1)
 
 plt_ax12_ax23_combined.varimax = plot_grid(plt_ax12.varimax, plt_ax23.varimax, ncol = 1)
-ggsave(plot = plt_ax12_ax23_combined.varimax, filename = "2502-indv-level-code/Ind_nonphyPCA_ax123_LESall_varimax.pdf",
+ggsave(plot = plt_ax12_ax23_combined.varimax, filename = "individual-level-code/Ind_nonphyPCA_ax123_LESall_varimax.pdf",
        width = 7.5, height = 8.1)
 

@@ -76,7 +76,7 @@ traitDataIndv = traitDataIndv %>%
   separate(SpeciesFullName_tosep, into = c("genus_name", "sp_name"), sep=" ") # will destroy column: SpeciesFullName_tosep
 
 # Add Family information
-genusFamilyTable = read.table("Phylomaker_genus_family.csv", sep=",", header=T)
+genusFamilyTable = read.table("rawdata/PhyloMaker_genus_family.csv", sep=",", header=T)
 traitDataIndv = traitDataIndv %>% left_join(genusFamilyTable, by = c("genus_name" = "Genus")) %>%
   rename(family_name = Family) %>% dplyr::select(-Group, -Source) # remove extra columns
 
@@ -156,12 +156,9 @@ traitDataIndv_SelectedTraits_log_scale = func_log_scale(traitDataIndv_SelectedTr
 # Save data
 save(traitDataIndv, traitDataIndv_SelectedTraits, 
      traitDataIndv_SelectedTraits_log, traitDataIndv_SelectedTraits_log_scale,
-     file = "2502-indv-level-code/traitDataFujian-Ind-step1.RData")
+     file = "individual-level-code/traitDataFujian-Ind-step1.RData")
 
 save(traitDataIndv, traitDataIndv_SelectedTraits_spavg,
      traitDataIndv_SelectedTraits_spavg_log, traitDataIndv_SelectedTraits_log_scale,
-     file = "2502-indv-level-code/traitDataFujian-SpAvg-step1.RData")
+     file = "individual-level-code/traitDataFujian-SpAvg-step1.RData")
 
-
-# TODO: 2025.6.13: prepare for local-scale meta studies
-saveRDS(traitDataIndv_SelectedTraits, file = "2502-indv-level-code/Zhu2024-data-traits.RDS")

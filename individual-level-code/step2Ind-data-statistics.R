@@ -4,7 +4,7 @@
 rm(list=ls())
 library(dplyr)
 library(tidyr)
-load("2502-indv-level-code/traitDataFujian-Ind-step1.RData") # from step 1
+load("individual-level-code/traitDataFujian-Ind-step1.RData") # from step 1
 
 # For manual confirmation
 # write.csv(traitDataIndv_SelectedTraits %>% dplyr::select(-SpeciesCH), file="2502-indv-level-code/traitDataIndv-statistics250307.csv", row.names=FALSE)

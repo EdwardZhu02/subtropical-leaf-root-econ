@@ -6,7 +6,7 @@ library(ggthemes)
 library(pheatmap)
 library(reshape2) # for drawing heatmap using ggplot2
 
-load("2502-indv-level-code/traitDataFujian-Ind-step1.RData") # TODO: individual-level data
+load("individual-level-code/traitDataFujian-Ind-step1.RData") # TODO: individual-level data
 
 # == Already done in preparation of the data, updated 7/11-24
 # # ------------------------------------------------------------------------------
@@ -108,7 +108,7 @@ plt_SMA_htmap_pvalue = ggplot(data = melted_pvalue_matrix, aes(Var2, Var1, fill 
     legend.position = c(0.6, 0.7),
     legend.direction = "horizontal")+
   guides(fill = guide_colorbar(barwidth = 7, barheight = 1, title.position = "top", title.hjust = 0.5))
-ggsave(plot=plt_SMA_htmap_pvalue, filename="2502-indv-level-code/Ind_SMAhtmap_Pvalue.pdf", width=8, height=4.5)
+ggsave(plot=plt_SMA_htmap_pvalue, filename="individual-level-code/Ind_SMAhtmap_Pvalue.pdf", width=8, height=4.5)
 
 
 plt_SMA_htmap_rvalue = ggplot(data = melted_rvalue_matrix, aes(Var2, Var1, fill = value)) +
@@ -131,4 +131,4 @@ plt_SMA_htmap_rvalue = ggplot(data = melted_rvalue_matrix, aes(Var2, Var1, fill 
     legend.position = c(0.6, 0.7),
     legend.direction = "horizontal")+
   guides(fill = guide_colorbar(barwidth = 7, barheight = 1, title.position = "top", title.hjust = 0.5))
-ggsave(plot=plt_SMA_htmap_rvalue, filename="2502-indv-level-code/Ind_SMAhtmap_Rvalue.pdf", width=8, height=4.5)
+ggsave(plot=plt_SMA_htmap_rvalue, filename="individual-level-code/Ind_SMAhtmap_Rvalue.pdf", width=8, height=4.5)

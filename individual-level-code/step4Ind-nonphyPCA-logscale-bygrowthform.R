@@ -14,8 +14,7 @@ library(FactoMineR) # perform PCA analysis
 library(patchwork) # plot merging
 library(cowplot) # plot merging
 
-load("2502-indv-level-code/traitDataFujian-Ind-step1.RData")
-
+load("individual-level-code/traitDataFujian-Ind-step1.RData")
 
 .is_grouping_var <- function(x) {length(x) > 1 & (is.character(x) | is.factor(x))}
 .is_continuous_var <- function(x) {x[1] %in% c("cos2", "contrib", "x", "y") | is.numeric(x)}
@@ -78,12 +77,16 @@ fviz_pca_biplot_MODIFIED <- function (X, axes = c(1, 2), geom = c("point", "text
 traitDataPCA_touse = traitDataIndv_SelectedTraits_log # perform scaling later (line 36, 27/12-24)
 
 ### SET TRAITS TO USE###
-# All traits, need to be log transformed and scaled 
-traitName_touse = c("LPC","LNC","LMA","RD","SRL","SRA","RDMC","RTD","RNC","SRR25")
 
+## Fine root trait space (Figure 2)
 #traitName_touse = c("RTD","SRL","RD","RNC","RDMC","SRR25","SRA","RPC","RCC")
+
+## Leaf trait space (Figure 2)
 #traitName_touse = c("LMA","LNC","LPC","LCC","Ld13C","Rdark25P","Vcmax25","Asat","LA")
-#traitName_touse = c("LCC","LNC","LPC","Ld13C","RCC","RNC","RPC")
+
+# Markers and identified co-predictors, leaf+root (Figure 2)
+traitName_touse = c("RTD","SRL","RD","RNC","LMA","LNC","RDMC","SRR25","SRA","LPC")
+
 
 # Resolve problem: non-unique values when setting 'row.names': ‘Castanopsis fordii’, ‘Machilus pauhoi’ 
 # because of sp-gf averaging

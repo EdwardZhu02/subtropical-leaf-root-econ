@@ -14,7 +14,7 @@ library(ggthemes)
 library(patchwork) # plot merging
 library(cowplot) # plot merging
 
-load("2502-indv-level-code/traitDataFujian-Ind-step1.RData")
+load("individual-level-code/traitDataFujian-Ind-step1.RData")
 
 ### SET DATA TO USE ###
 traitData_touse = traitDataIndv_SelectedTraits_log
@@ -81,7 +81,7 @@ smaplt_shrub_data$predicted_LNC_lower_shrub = smaplt_shrub_intercept_lower + sma
 
 # Annotation, R2 and p-value
 model.sma.LNC_LMA_annotlabel = paste0(
-  "Merged:R=", 
+  "M:R=", 
   round(ifelse(
     as.numeric(model.sma.LNC_LMA_total[["groupsummary"]][["Slope"]]) > 0,
     sqrt(as.numeric(model.sma.LNC_LMA_total[["r2"]])),
@@ -148,7 +148,7 @@ smaplt.LNC_LMA = ggplot(smaplt_total_data, aes(x=LMA, y=LNC)) +
   scale_color_manual(values = c("#EECA40", "#7998AD", "#F07673")) + 
   annotate("text", x = 0.008, y = 1.18, label = model.sma.LNC_LMA_annotlabel, hjust = 0, vjust = 1, size = 3.2)
 
-ggsave(plot = smaplt.LNC_LMA, filename = "2502-indv-level-code/Ind_sma.LNC_LMA.pdf", width = 2.6, height = 2.6)
+ggsave(plot = smaplt.LNC_LMA, filename = "individual-level-code/Ind_sma.LNC_LMA.pdf", width = 2.6, height = 2.6)
 
 # ------------------------------------------------------------------------------
 # PART 2: RES collaboration (RD-SRL)
@@ -204,7 +204,7 @@ smaplt_shrub_data$predicted_RD_lower_shrub = smaplt_shrub_intercept_lower + smap
 
 # Annotation, R2 and p-value
 model.sma.RD_SRL_annotlabel = paste0(
-  "Merged:R=", 
+  "M:R=", 
   round(ifelse(
     as.numeric(model.sma.RD_SRL_total[["groupsummary"]][["Slope"]]) > 0,
     sqrt(as.numeric(model.sma.RD_SRL_total[["r2"]])),
@@ -271,7 +271,7 @@ smaplt.RD_SRL = ggplot(smaplt_total_data, aes(x=SRL, y=RD)) +
   scale_color_manual(values = c("#EECA40", "#7998AD", "#F07673")) +
   annotate("text", x = 3.6, y = 0.53, label = model.sma.RD_SRL_annotlabel, hjust = 0, vjust = 1, size = 3.2)
 
-ggsave(plot = smaplt.RD_SRL, filename = "2502-indv-level-code/Ind_sma.RD_SRL.pdf", width = 2.6, height = 2.6)
+ggsave(plot = smaplt.RD_SRL, filename = "individual-level-code/Ind_sma.RD_SRL.pdf", width = 2.6, height = 2.6)
 
 # ------------------------------------------------------------------------------
 # PART 3: RES conservation (RNC-RTD)
@@ -327,7 +327,7 @@ smaplt_shrub_data$predicted_RNC_lower_shrub = smaplt_shrub_intercept_lower + sma
 
 # Annotation, R2 and p-value
 model.sma.RNC_RTD_annotlabel = paste0(
-  "Merged:R=", 
+  "M:R=", 
   round(ifelse(
     as.numeric(model.sma.RNC_RTD_total[["groupsummary"]][["Slope"]]) > 0,
     sqrt(as.numeric(model.sma.RNC_RTD_total[["r2"]])),
@@ -394,7 +394,7 @@ smaplt.RNC_RTD = ggplot(smaplt_total_data, aes(x=RTD, y=RNC)) +
   scale_color_manual(values = c("#EECA40", "#7998AD", "#F07673")) +
   annotate("text", x = 0.165, y = 1.48, label = model.sma.RNC_RTD_annotlabel, hjust = 0, vjust = 1, size = 3.2)
 
-ggsave(plot = smaplt.RNC_RTD, filename = "2502-indv-level-code/Ind_sma.RNC_RTD.pdf", width = 2.6, height = 2.6)
+ggsave(plot = smaplt.RNC_RTD, filename = "individual-level-code/Ind_sma.RNC_RTD.pdf", width = 2.6, height = 2.6)
 
 
 # ------------------------------------------------------------------------------
@@ -451,7 +451,7 @@ smaplt_shrub_data$predicted_RDMC_lower_shrub = smaplt_shrub_intercept_lower + sm
 
 # Annotation, R2 and p-value
 model.sma.RDMC_RTD_annotlabel = paste0(
-  "Merged:R=", 
+  "M:R=", 
   round(ifelse(
     as.numeric(model.sma.RDMC_RTD_total[["groupsummary"]][["Slope"]]) > 0,
     sqrt(as.numeric(model.sma.RDMC_RTD_total[["r2"]])),
@@ -518,7 +518,7 @@ smaplt.RDMC_RTD = ggplot(smaplt_total_data, aes(x=RTD, y=RDMC)) +
   scale_color_manual(values = c("#EECA40", "#7998AD", "#F07673")) +
   annotate("text", x = 0.05, y = 0.42, label = model.sma.RDMC_RTD_annotlabel, hjust = 0, vjust = 1, size = 3.2)
 
-ggsave(plot = smaplt.RDMC_RTD, filename = "2502-indv-level-code/Ind_sma.RDMC_RTD.pdf", width = 2.6, height = 2.6)
+ggsave(plot = smaplt.RDMC_RTD, filename = "individual-level-code/Ind_sma.RDMC_RTD.pdf", width = 2.6, height = 2.6)
 
 
 # ------------------------------------------------------------------------------
@@ -575,7 +575,7 @@ smaplt_shrub_data$predicted_RDMC_lower_shrub = smaplt_shrub_intercept_lower + sm
 
 # Annotation, R2 and p-value
 model.sma.RDMC_RNC_annotlabel = paste0(
-  "Merged:R=", 
+  "M:R=", 
   round(ifelse(
     as.numeric(model.sma.RDMC_RNC_total[["groupsummary"]][["Slope"]]) > 0,
     sqrt(as.numeric(model.sma.RDMC_RNC_total[["r2"]])),
@@ -642,7 +642,7 @@ smaplt.RDMC_RNC = ggplot(smaplt_total_data, aes(x=RNC, y=RDMC)) +
   scale_color_manual(values = c("#EECA40", "#7998AD", "#F07673")) +
   annotate("text", x = 0.87, y = 0.335, label = model.sma.RDMC_RNC_annotlabel, hjust = 0, vjust = 1, size = 3.2)
 
-ggsave(plot = smaplt.RDMC_RNC, filename = "2502-indv-level-code/Ind_sma.RDMC_RNC.pdf", width = 2.6, height = 2.6)
+ggsave(plot = smaplt.RDMC_RNC, filename = "individual-level-code/Ind_sma.RDMC_RNC.pdf", width = 2.6, height = 2.6)
 
 
 # ------------------------------------------------------------------------------
@@ -699,7 +699,7 @@ smaplt_shrub_data$predicted_LNC_lower_shrub = smaplt_shrub_intercept_lower + sma
 
 # Annotation, R2 and p-value
 model.sma.LNC_LPC_annotlabel = paste0(
-  "Merged:R=", 
+  "M:R=", 
   round(ifelse(
     as.numeric(model.sma.LNC_LPC_total[["groupsummary"]][["Slope"]]) > 0,
     sqrt(as.numeric(model.sma.LNC_LPC_total[["r2"]])),
@@ -766,7 +766,7 @@ smaplt.LNC_LPC = ggplot(smaplt_total_data, aes(x=LPC, y=LNC)) +
   scale_color_manual(values = c("#EECA40", "#7998AD", "#F07673")) +
   annotate("text", x = 0.37, y = 1.35, label = model.sma.LNC_LPC_annotlabel, hjust = 0, vjust = 1, size = 3.2)
 
-ggsave(plot = smaplt.LNC_LPC, filename = "2502-indv-level-code/Ind_sma.LNC_LPC.pdf", width = 2.6, height = 2.6)
+ggsave(plot = smaplt.LNC_LPC, filename = "individual-level-code/Ind_sma.LNC_LPC.pdf", width = 2.6, height = 2.6)
 
 
 # ------------------------------------------------------------------------------
@@ -823,7 +823,7 @@ smaplt_shrub_data$predicted_LMA_lower_shrub = smaplt_shrub_intercept_lower + sma
 
 # Annotation, R2 and p-value
 model.sma.LMA_LPC_annotlabel = paste0(
-  "Merged:R=", 
+  "M:R=", 
   round(ifelse(
     as.numeric(model.sma.LMA_LPC_total[["groupsummary"]][["Slope"]]) > 0,
     sqrt(as.numeric(model.sma.LMA_LPC_total[["r2"]])),
@@ -890,7 +890,7 @@ smaplt.LMA_LPC = ggplot(smaplt_total_data, aes(x=LPC, y=LMA)) +
   scale_color_manual(values = c("#EECA40", "#7998AD", "#F07673")) +
   annotate("text", x = 0.52, y = 0.016, label = model.sma.LMA_LPC_annotlabel, hjust = 0, vjust = 1, size = 3.2)
 
-ggsave(plot = smaplt.LMA_LPC, filename = "2502-indv-level-code/Ind_sma.LMA_LPC.pdf", width = 2.6, height = 2.6)
+ggsave(plot = smaplt.LMA_LPC, filename = "individual-level-code/Ind_sma.LMA_LPC.pdf", width = 2.6, height = 2.6)
 
 
 # (ADDED 250628): Rr25-Rdark25P ------------------------------------------------------
@@ -946,7 +946,7 @@ smaplt_shrub_data$predicted_SRR25_lower_shrub = smaplt_shrub_intercept_lower + s
 
 # Annotation, R2 and p-value
 model.sma.SRR25_Rdark25P_annotlabel = paste0(
-  "Merged:R=", 
+  "M:R=", 
   round(ifelse(
     as.numeric(model.sma.SRR25_Rdark25P_total[["groupsummary"]][["Slope"]]) > 0,
     sqrt(as.numeric(model.sma.SRR25_Rdark25P_total[["r2"]])),
@@ -1013,7 +1013,7 @@ smaplt.SRR25_Rdark25P = ggplot(smaplt_total_data, aes(x=Rdark25P, y=SRR25)) +
   scale_color_manual(values = c("#EECA40", "#7998AD", "#F07673")) +
   annotate("text", x = 0.4, y = 4.5, label = model.sma.SRR25_Rdark25P_annotlabel, hjust = 0, vjust = 1, size = 3.2)
 
-ggsave(plot = smaplt.SRR25_Rdark25P, filename = "2502-indv-level-code/Ind_sma.SRR25_Rdark25P.pdf", width = 2.6, height = 2.6)
+ggsave(plot = smaplt.SRR25_Rdark25P, filename = "individual-level-code/Ind_sma.SRR25_Rdark25P.pdf", width = 2.6, height = 2.6)
 
 
 # (ADDED 250628): Rr25-RNC ------------------------------------------------------
@@ -1069,7 +1069,7 @@ smaplt_shrub_data$predicted_LNC_lower_shrub = smaplt_shrub_intercept_lower + sma
 
 # Annotation, R2 and p-value
 model.sma.LNC_RNC_annotlabel = paste0(
-  "Merged:R=", 
+  "M:R=", 
   round(ifelse(
     as.numeric(model.sma.LNC_RNC_total[["groupsummary"]][["Slope"]]) > 0,
     sqrt(as.numeric(model.sma.LNC_RNC_total[["r2"]])),
@@ -1136,6 +1136,6 @@ smaplt.LNC_RNC = ggplot(smaplt_total_data, aes(x=RNC, y=LNC)) +
   scale_color_manual(values = c("#EECA40", "#7998AD", "#F07673")) +
   annotate("text", x = 0.4, y = 4.5, label = model.sma.LNC_RNC_annotlabel, hjust = 0, vjust = 1, size = 3.2)
 
-ggsave(plot = smaplt.LNC_RNC, filename = "2502-indv-level-code/Ind_sma.LNC_RNC.pdf", width = 2.6, height = 2.6)
+ggsave(plot = smaplt.LNC_RNC, filename = "individual-level-code/Ind_sma.LNC_RNC.pdf", width = 2.6, height = 2.6)
 
 

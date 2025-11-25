@@ -1,6 +1,6 @@
 rm(list=ls())
 
-# REF: https://zhuanlan.zhihu.com/p/506277796
+# Figure S2
 # devtools::install_github("ggobi/ggally")
 library(tidyverse)
 library(dplyr)
@@ -9,7 +9,7 @@ library(rstatix)
 library(ggsci)
 
 
-load("2502-indv-level-code/traitDataFujian-Ind-step1.RData") # TODO: individual-level data
+load("individual-level-code/traitDataFujian-Ind-step1.RData") # TODO: individual-level data
 
 ### SET DATA TO USE ###
 traitData_touse = traitDataIndv_SelectedTraits_log
@@ -33,6 +33,6 @@ p3 = ggpairs(traitData_touse, columns = variables,
   ggplot2::scale_color_manual(values = c("#547bb4", "#dd7c4f"))+
   ggplot2::theme_bw()
 
-pdf("2502-indv-level-code/LMM-all-heatmap.pdf",height = 15,width = 15)
+pdf("individual-level-code/LMM-all-heatmap.pdf",height = 15,width = 15)
 print(p3)
 dev.off()
