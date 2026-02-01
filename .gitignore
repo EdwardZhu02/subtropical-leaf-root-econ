@@ -53,3 +53,5 @@ rsconnect/
 *.pdf
 *.png
 *.jpg
+*.csv
+climdata/
