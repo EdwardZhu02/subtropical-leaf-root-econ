@@ -73,7 +73,6 @@ fviz_pca_biplot_MODIFIED <- function (X, axes = c(1, 2), geom = c("point", "text
 
 
 ### SET DATA TO USE ### 
-# TODO: perform scaling later (line 36, 27/12-24)
 traitDataPCA_touse = traitDataIndv_SelectedTraits_log # perform scaling later (line 36, 27/12-24)
 
 ### SET TRAITS TO USE###
