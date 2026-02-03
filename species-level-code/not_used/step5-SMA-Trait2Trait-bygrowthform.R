@@ -6,7 +6,7 @@ library(ggthemes)
 library(patchwork) # plot merging
 library(cowplot) # plot merging
 
-load("traitDataFujian-spavg-phylo-step2.RData")
+load("species-level-code/traitDataFujian-spavg-phylo-step2.RData")
 
 ### SET DATA TO USE ###
 traitData_touse = traitDataIndv_spgfavg_log
@@ -105,7 +105,7 @@ smaplt.LNC_LMA = ggplot(smaplt_total_data, aes(x=LMA, y=LNC)) +
   scale_color_manual(values = c("#EECA40", "#7998AD", "#F07673")) + 
   annotate("text", x = 0.008, y = 1.18, label = model.sma.LNC_LMA_annotlabel, hjust = 0, vjust = 1, size = 3.2)
 
-ggsave(plot = smaplt.LNC_LMA, filename = "smaplt.LNC_LMA.pdf", width = 3, height = 2.9)
+ggsave(plot = smaplt.LNC_LMA, filename = "species-level-code/smaplt.LNC_LMA.pdf", width = 3, height = 2.9)
 
 # ------------------------------------------------------------------------------
 # PART 2: RES collaboration (RD-SRL)
@@ -195,7 +195,7 @@ smaplt.RD_SRL = ggplot(smaplt_total_data, aes(x=SRL, y=RD)) +
   scale_color_manual(values = c("#EECA40", "#7998AD", "#F07673")) + 
   annotate("text", x = 3.6, y = 0.53, label = model.sma.RD_SRL_annotlabel, hjust = 0, vjust = 1, size = 3.2)
 
-ggsave(plot = smaplt.RD_SRL, filename = "smaplt.RD_SRL.pdf", width = 3, height = 2.9)
+ggsave(plot = smaplt.RD_SRL, filename = "species-level-code/smaplt.RD_SRL.pdf", width = 3, height = 2.9)
 
 # ------------------------------------------------------------------------------
 # PART 3: RES conservation (RNC-RTD)
@@ -285,7 +285,7 @@ smaplt.RNC_RTD = ggplot(smaplt_total_data, aes(x=RTD, y=RNC)) +
   scale_color_manual(values = c("#EECA40", "#7998AD", "#F07673")) + 
   annotate("text", x = 0.165, y = 1.48, label = model.sma.RNC_RTD_annotlabel, hjust = 0, vjust = 1, size = 3.2)
 
-ggsave(plot = smaplt.RNC_RTD, filename = "smaplt.RNC_RTD.pdf", width = 3, height = 2.9)
+ggsave(plot = smaplt.RNC_RTD, filename = "species-level-code/smaplt.RNC_RTD.pdf", width = 3, height = 2.9)
 
 
 # ------------------------------------------------------------------------------
@@ -376,7 +376,7 @@ smaplt.RDMC_RTD = ggplot(smaplt_total_data, aes(x=RTD, y=RDMC)) +
   scale_color_manual(values = c("#EECA40", "#7998AD", "#F07673")) + 
   annotate("text", x = 0.05, y = 0.42, label = model.sma.RDMC_RTD_annotlabel, hjust = 0, vjust = 1, size = 3.2)
 
-ggsave(plot = smaplt.RDMC_RTD, filename = "smaplt.RDMC_RTD.pdf", width = 3, height = 3)
+ggsave(plot = smaplt.RDMC_RTD, filename = "species-level-code/smaplt.RDMC_RTD.pdf", width = 3, height = 3)
 
 
 # ------------------------------------------------------------------------------
@@ -467,7 +467,7 @@ smaplt.RDMC_RNC = ggplot(smaplt_total_data, aes(x=RNC, y=RDMC)) +
   scale_color_manual(values = c("#EECA40", "#7998AD", "#F07673")) + 
   annotate("text", x = 0.87, y = 0.335, label = model.sma.RDMC_RNC_annotlabel, hjust = 0, vjust = 1, size = 3.2)
 
-ggsave(plot = smaplt.RDMC_RNC, filename = "smaplt.RDMC_RNC.pdf", width = 3, height = 3)
+ggsave(plot = smaplt.RDMC_RNC, filename = "species-level-code/smaplt.RDMC_RNC.pdf", width = 3, height = 3)
 
 
 # ------------------------------------------------------------------------------
@@ -558,7 +558,7 @@ smaplt.LNC_LPC = ggplot(smaplt_total_data, aes(x=LPC, y=LNC)) +
   scale_color_manual(values = c("#EECA40", "#7998AD", "#F07673")) + 
   annotate("text", x = 0.37, y = 1.35, label = model.sma.LNC_LPC_annotlabel, hjust = 0, vjust = 1, size = 3.2)
 
-ggsave(plot = smaplt.LNC_LPC, filename = "smaplt.LNC_LPC.pdf", width = 3, height = 3)
+ggsave(plot = smaplt.LNC_LPC, filename = "species-level-code/smaplt.LNC_LPC.pdf", width = 3, height = 3)
 
 
 # ------------------------------------------------------------------------------
@@ -649,7 +649,7 @@ smaplt.LMA_LPC = ggplot(smaplt_total_data, aes(x=LPC, y=LMA)) +
   scale_color_manual(values = c("#EECA40", "#7998AD", "#F07673")) + 
   annotate("text", x = 0.52, y = 0.016, label = model.sma.LMA_LPC_annotlabel, hjust = 0, vjust = 1, size = 3.2)
 
-ggsave(plot = smaplt.LMA_LPC, filename = "smaplt.LMA_LPC.pdf", width = 3, height = 3)
+ggsave(plot = smaplt.LMA_LPC, filename = "species-level-code/smaplt.LMA_LPC.pdf", width = 3, height = 3)
 
 
 # PART 8: Try to merge all these plots (failed) --------------------------------

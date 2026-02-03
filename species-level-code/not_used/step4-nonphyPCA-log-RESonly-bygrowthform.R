@@ -12,7 +12,7 @@ library(cowplot) # plot merging
 # modified in response to Sandy Harrison's comment -> Use original values without normalization
 # to perform the PCA to show if the conclusion was altered
 # ------------------------------------------------------------------------------
-load("traitDataFujian-spavg-phylo-step2.RData")
+load("species-level-code/traitDataFujian-spavg-phylo-step2.RData")
 
 ### SET DATA TO USE ###
 traitDataPCA_touse = traitDataIndv_spgfavg_log # perform scaling later (line 36, 27/12-24)
@@ -53,7 +53,7 @@ nonphyloPCAresult = PCA(nonphyloPCAData_numonly, scale.unit = T, graph = F)
 nonphyloPCA.screeplot = fviz_screeplot(nonphyloPCAresult, addlabels = TRUE, ylim = c(0, 60),
                                        barfill="#7998AD", barcolor="#7998AD", linecolor="black") +
   labs(title="RES") + theme_classic()
-ggsave(filename = "plt_nonphyPCA_scree-RES.pdf", plot = nonphyloPCA.screeplot, width = 3, height = 3)
+ggsave(filename = "species-level-code/plt_nonphyPCA_scree-RES.pdf", plot = nonphyloPCA.screeplot, width = 3, height = 3)
 
 # ------------------------------------------------------------------------------
 # 2-D PCA biplot: GrowthForm as grouping factor
@@ -93,7 +93,7 @@ plt_ax12 = plt_nonphyloPCA_biplot_ax12 + plt_nonphyloPCA_contribplot_ax12 +
   #plot_annotation(title = "PC1-2, biplot and contribution plot") +
   plot_layout(guides = "collect") & theme(legend.position='right')
 
-ggsave(plot = plt_ax12, filename = "plt_nonphyPCA_ax12Combined_RES.pdf",
+ggsave(plot = plt_ax12, filename = "species-level-code/plt_nonphyPCA_ax12Combined_RES.pdf",
        width = 6.5, height = 3.5)
 
 

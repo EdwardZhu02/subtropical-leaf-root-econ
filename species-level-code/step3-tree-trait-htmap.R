@@ -22,7 +22,7 @@ library(ggheatmap) #devtools::install_github("XiaoLuo-boy/ggheatmap")
 library(pheatmap)
 # library(rr2) # calculate r2 for PGLS models
 
-load("traitDataFujian-spavg-phylo-step2.RData")
+load("species-level-code/traitDataFujian-spavg-phylo-step2.RData")
 
 ### SET DATA TO USE ###
 traitData_touse = traitDataIndv_spavg_log
@@ -132,4 +132,4 @@ plt.phylo.heatmap = plt.phylo.heatmap %>% ggheatmap_theme(1,
 plt.phylo.total = plt.phylo.heatmap %>% insert_left(plt.phylo.tree, width = 0.4)
 plt.phylo.total
 
-ggsave(filename = "plt_TraitHeatmap_250701.pdf", plot = plt.phylo.total, width = 6.3, height = 6)
+ggsave(filename = "species-level-code/step3-plt_TraitHeatmap.pdf", plot = plt.phylo.total, width = 6.3, height = 6)

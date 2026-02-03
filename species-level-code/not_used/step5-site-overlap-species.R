@@ -10,7 +10,7 @@ library(ggsignif)  # For adding significance markers
 library(rstatix)   # For pairwise wilcox test
 
 # Perform across-site comparison using community-mean trait values
-load("traitDataFujian-spavg-phylo-step2.RData")
+load("species-level-code/traitDataFujian-spavg-phylo-step2.RData")
 
 # use data frame 'traitDataIndv', the original, not species averaged or normalized data for analysis
 traitDataIndv_touse = traitDataIndv # backup original df, while copy it for this script
@@ -22,31 +22,39 @@ traitDataIndv_touse$SiteLoc = ifelse(startsWith(traitDataIndv_touse$SpeciesID, "
                                      ifelse(startsWith(traitDataIndv_touse$SpeciesID, "WH"), "valley",
                                             traitDataIndv_touse$SiteLoc)) # NA
 
-# Step 2: reshape data for plotting (box plot, long data) ----------------------
-traitDataIndv_gfloc_mean_box = traitDataIndv_touse %>%
-  dplyr::select(where(is.numeric), GrowthForm, SiteLoc, SampleID) %>%   # Select numeric columns and SiteLoc
-  pivot_longer(cols = -c(GrowthForm, SiteLoc, SampleID), names_to = "trait", values_to = "value") %>% 
+# Step 2: identify duplicated species occurring in both sites
+speciesList_top = traitDataIndv_touse %>% filter(SiteLoc == "hilltop") %>% distinct(speciesFullName)
+speciesList_bottom = traitDataIndv_touse %>% filter(SiteLoc == "valley") %>% distinct(speciesFullName)
+speciesList_overlap = intersect(speciesList_top$speciesFullName, speciesList_bottom$speciesFullName)
+rm(speciesList_top, speciesList_bottom) # remove intermediate data
+
+# Step 3: extract data from those duplicated species
+traitDataIndv_touse = traitDataIndv_touse %>% filter(speciesFullName %in% speciesList_overlap)
+
+# Step 4: calculate mean trait values and SD, TOP and BOTTOM site, sep. -------
+# Most of the overlap species only have 1 replicate, so species-level statistics can't be done.
+# Here, we take an alternative approach, calculating the community mean trait values for each site
+# using only the overlapping species.
+traitData_overlap_commavg = traitDataIndv_touse %>%
+  group_by(`SiteLoc`) %>% dplyr::summarize(
+    across(where(is.numeric), list(mean = ~mean(.x, na.rm = TRUE), sd = ~sd(.x, na.rm = TRUE)))
+  ) %>% ungroup()
+
+traitDataIndv_gfloc_mean_box = traitDataIndv_touse %>% 
+  dplyr::select(speciesFullName, SiteLoc, GrowthForm, where(is.numeric)) %>%
+  rstatix::convert_as_factor(SiteLoc) %>%
+  pivot_longer(cols = -c(GrowthForm, SiteLoc, speciesFullName), names_to = "trait", values_to = "value") %>% 
   group_by(trait) %>%
   filter(!is.na(value))
 
-# Exclude liana entries
-traitDataIndv_gfloc_mean_box = traitDataIndv_gfloc_mean_box %>% dplyr::filter(GrowthForm != "liana")
 
-
-# Step 3: generate plots -------------------------------------------------------
-#
-# Filter only data of interest to generate the plot
-# traitlist_touse = c(
-#   "RTD","SRL","RD","RNC","SRA","RPC","RCC","RDMC","SRR25",
-#   "rs25","LMA","LNC","LPC","Rdark25P","Rlight25P","Vcmax25","Asat",
-#   "vH","SWCleaf","SWCbranch","WD","Ks","TLP","H","DBH" # hydraulic traits
-# )
+# Step 5: data visualization
 # 1. photosynthesis and respiration
 # traitlist_touse = c("SRR25","rs25","Rdark25P","Rlight25P","Vcmax25","Asat")
 # 2. chemical traits
 # traitlist_touse = c("RCC","RNC","RPC","LCC","LNC","LPC")
 # 3. morphological, leaf+root
-# traitlist_touse = c("RTD","SRL","RD","SRA","RDMC","LMA")
+#traitlist_touse = c("RTD","SRL","RD","SRA","RDMC","LMA")
 # 4. hydraulic traits
 traitlist_touse = c( "vH","SWCleaf","SWCbranch","WD","Ks","TLP","H","DBH")
 
@@ -62,7 +70,7 @@ for (i in 1:length(traitlist_touse)) {
       GrowthForm = as.factor(GrowthForm),
       UniqIdentifier = as.factor(UniqIdentifier),
       trait = as.factor(trait)
-      )
+    )
   
   # perform wilcox test
   traitData_gfloc.test.SiteGF = traitDataIndv_gfloc_touse %>% group_by(trait) %>%
@@ -74,7 +82,7 @@ for (i in 1:length(traitlist_touse)) {
   
   # plot1: site + growth form, individual significance check boxplot ===========
   plt1 = ggboxplot(traitDataIndv_gfloc_touse, x = "GrowthForm", y = "value", fill = "SiteLoc") +
-    scale_fill_manual(values = c("#6888F5", "#D77071")) + labs(subtitle = traitlist_touse[i])
+    scale_fill_manual(values = c("#C5D6F0", "#F18C54")) + labs(subtitle = traitlist_touse[i])
   traitData_gfloc.test.SiteGF = traitData_gfloc.test.SiteGF %>% add_xy_position() %>% 
     mutate(xmin = 0.6 * xmin, xmax = 0.6 * xmax)
   plt1 = plt1 + stat_pvalue_manual(traitData_gfloc.test.SiteGF, label = "p.adj.signif", step.increase = 0.04, hide.ns = T) +
@@ -101,7 +109,6 @@ for (i in 1:length(traitlist_touse)) {
   
   # add to the total plot list
   tomerge_plot_list[[i]] = pltall
-  # break
 }
 
 # Combine plots with patchwork
@@ -116,10 +123,11 @@ for (i in 2:length(traitlist_touse)) {
 }
 
 boxplt_GrowthFormCombined = boxplt_GrowthFormCombined + 
-  # plot_annotation(title = "Part 1: Photosynthesis and respiration traits") +
-  # plot_annotation(title = "Part 2: Chemical traits (leaf + fine root)") +
+  # plot_annotation(title = "Part 1: Photosynthesis and respiration traits", subtitle = "Overlapping species (n=10)") +
+  # plot_annotation(title = "Part 2: Chemical traits (leaf + fine root)", subtitle = "Overlapping species (n=10)") +
+  # plot_annotation(title = "Part 3: Morphological traits (leaf + fine root)", subtitle = "Overlapping species (n=10)") +
   plot_annotation(title = "Part 4: Hydraulic traits") +
   plot_layout(guides = "collect", design = layout) & theme(legend.position='bottom')
 
-ggsave(plot = boxplt_GrowthFormCombined, filename = "boxplt_CompNew_Part4.pdf",
+ggsave(plot = boxplt_GrowthFormCombined, filename = "species-level-code/step5-boxplt_CompNew.pdf",
        width = 12, height = 5.5)

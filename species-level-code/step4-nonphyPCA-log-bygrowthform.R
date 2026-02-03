@@ -12,7 +12,7 @@ library(cowplot) # plot merging
 # modified in response to Sandy Harrison's comment -> Use original values without normalization
 # to perform the PCA to show if the conclusion was altered
 # ------------------------------------------------------------------------------
-load("traitDataFujian-spavg-phylo-step2.RData")
+load("species-level-code/traitDataFujian-spavg-phylo-step2.RData")
 
 ### SET DATA TO USE ###
 traitDataPCA_touse = traitDataIndv_spgfavg_log # perform scaling later (line 36, 27/12-24)
@@ -130,7 +130,7 @@ plt_nonphyloPCA_contribplot_ax23[["data"]] %>% view()
 
 # Combine the two plots side by side and save
 plt_ax12_ax23_combined = plot_grid(plt_ax12, plt_ax23, ncol = 1)
-ggsave(plot = plt_ax12_ax23_combined, filename = "plt_nonphyPCA_ax123Combined_RLESRDMC.pdf",
+ggsave(plot = plt_ax12_ax23_combined, filename = "species-level-code/plt_nonphyPCA_ax123Combined_RLESRDMC.pdf",
        width = 6.5, height = 7)
 
 

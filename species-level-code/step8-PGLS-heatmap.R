@@ -18,7 +18,7 @@ library(reshape2) # for drawing heatmap using ggplot2
 
 # TODO: Updated 21/11-24, use original and perform binding in the latter script
 # Load: traitDataIndv, traitDataIndv_spavg, traitDataIndv_spavg_log, traitDataIndv_spavg_log_ztransform, spTaxaNames_withfam, phylotree_result
-load("traitDataFujian-spavg-phylo-step2.RData") 
+load("species-level-code/traitDataFujian-spavg-phylo-step2.RData") 
 
 # Refs (different approaches for conducting the lambda-model in phylo regression):
 # http://blog.phytools.org/2012/11/fitting-model-in-phylogenetic.html
@@ -189,7 +189,7 @@ plt_htmap_lambda = ggplot(data = melted_lambda_matrix, aes(Var2, Var1, fill = va
     legend.direction = "vertical")
 #guides(fill = guide_colorbar(barwidth = 1, barheight = 7, title.position = "top", title.hjust = 0.5))
 #ggsave(plot=plt_htmap_lambda, filename="plt_PGLS_htmap_lambda.pdf", width=9.5, height=10)
-ggsave(plot=plt_htmap_lambda, filename="plt_PGLS_htmap_lambda_all.pdf", width=5.3, height=4.3)
+ggsave(plot=plt_htmap_lambda, filename="species-level-code/plt_PGLS_htmap_lambda_all.pdf", width=5.3, height=4.3)
 # ggsave(plot=plt_htmap_lambda, filename="plt_PGLS_htmap_lambda_all.png", width=7, height=5.5, dpi=300)
 
 # Filter only significant dependent variables (Y) that have a lambda > 0 across almost all independent variables (X) ------------------------------------------------------------------
@@ -230,7 +230,7 @@ plt_htmap_pvalue = ggplot(data = melted_pvalue_matrix_lambdaSignif, aes(Var2, Va
     legend.direction = "vertical")
 #guides(fill = guide_colorbar(barwidth = 7, barheight = 1, title.position = "top", title.hjust = 0.5))
 #ggsave(plot=plt_htmap_pvalue, filename="plt_PGLS_htmap_pranova.pdf", width=9.5, height=10)
-ggsave(plot=plt_htmap_pvalue, filename="plt_PGLS_htmap_pranova_all.pdf", width=6.3, height=3)
+ggsave(plot=plt_htmap_pvalue, filename="species-level-code/plt_PGLS_htmap_pranova_all.pdf", width=6.3, height=3)
 # ggsave(plot=plt_htmap_pvalue, filename="plt_PGLS_htmap_pranova_all.png", width=7, height=3, dpi = 300)
 
 # The adjusted r value plot ---------------------------------------------------------
@@ -257,5 +257,5 @@ plt_htmap_rsq = ggplot(data = melted_rsq_matrix_lambdaSignif, aes(Var2, Var1, fi
     legend.direction = "vertical")
 #guides(fill = guide_colorbar(barwidth = 7, barheight = 1, title.position = "top", title.hjust = 0.5))
 #ggsave(plot=plt_htmap_rsq, filename="plt_PGLS_htmap_rsq.pdf", width=9.5, height=10)
-ggsave(plot=plt_htmap_rsq, filename="plt_PGLS_htmap_rsq_all.pdf", width=6.3, height=3)
+ggsave(plot=plt_htmap_rsq, filename="species-level-code/plt_PGLS_htmap_rsq_all.pdf", width=6.3, height=3)
 # ggsave(plot=plt_htmap_rsq, filename="plt_PGLS_htmap_rsq_all.png", width=7, height=3, dpi = 300)

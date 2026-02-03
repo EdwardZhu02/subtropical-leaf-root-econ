@@ -12,7 +12,7 @@ library(patchwork)
 # modified in response to Sandy Harrison's comment -> Use original values without normalization
 # to perform the PCA to show if the conclusion was altered
 # ------------------------------------------------------------------------------
-load("traitDataFujian-fmtdata-step3.RData")
+load("species-level-code/traitDataFujian-fmtdata-step3.RData")
 
 # TODO: remove LIANA entries in the data due to its minority in PCA analysis
 # traitDataIndv_normalized = traitDataIndv_normalized %>% filter(GrowthForm != "liana") # (41->37 species, but only 1 contain FR trait measurements)
@@ -108,7 +108,7 @@ plt_imp.MLR.SRR25_PC1to3_shrub = ggplot(imp.MLR.SRR25_PC1to3_shrub_data, aes(x =
   labs(x = "PC", y = "Relative importance")
 
 plt_imp.MLR.SRR25_PC1to3 = plt_imp.MLR.SRR25_PC1to3_total + plt_imp.MLR.SRR25_PC1to3_tree + plt_imp.MLR.SRR25_PC1to3_shrub
-ggsave(filename = "plt_imp.MLR.SRR25_PC1to3.pdf", plot = plt_imp.MLR.SRR25_PC1to3, width=6, height=2)
+ggsave(filename = "species-level-code/plt_imp.MLR.SRR25_PC1to3.pdf", plot = plt_imp.MLR.SRR25_PC1to3, width=6, height=2)
 
 
 # PART 2: Predicting Rdark25P using multiple liear regression (MLR, PC1-3) ----
@@ -151,4 +151,4 @@ plt_imp.MLR.Rdark25P_PC1to3_shrub = ggplot(imp.MLR.Rdark25P_PC1to3_shrub_data, a
   labs(x = "PC", y = "Relative importance")
 
 plt_imp.MLR.Rdark25P_PC1to3 = plt_imp.MLR.Rdark25P_PC1to3_total + plt_imp.MLR.Rdark25P_PC1to3_tree + plt_imp.MLR.Rdark25P_PC1to3_shrub
-ggsave(filename = "plt_imp.MLR.Rdark25P_PC1to3.pdf", plot = plt_imp.MLR.Rdark25P_PC1to3, width=6, height=2)
+ggsave(filename = "species-level-code/plt_imp.MLR.Rdark25P_PC1to3.pdf", plot = plt_imp.MLR.Rdark25P_PC1to3, width=6, height=2)

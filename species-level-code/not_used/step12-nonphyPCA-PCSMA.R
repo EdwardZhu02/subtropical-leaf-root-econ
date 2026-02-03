@@ -14,7 +14,7 @@ library(cowplot) # plot merging
 # modified in response to Sandy Harrison's comment -> Use original values without normalization
 # to perform the PCA to show if the conclusion was altered
 # ------------------------------------------------------------------------------
-load("traitDataFujian-spavg-phylo-step2.RData")
+load("species-level-code/traitDataFujian-spavg-phylo-step2.RData")
 
 # TODO: remove LIANA entries in the data due to its minority in PCA analysis
 # traitDataIndv_normalized = traitDataIndv_normalized %>% filter(GrowthForm != "liana") # (41->37 species, but only 1 contain FR trait measurements)

@@ -6,7 +6,7 @@ library(ggpmisc) # stat_poly_eq function
 library(reshape2)
 library(patchwork)
 
-load("traitDataFujian-spavg-phylo-step2.RData")
+load("species-level-code/traitDataFujian-spavg-phylo-step2.RData")
 
 ### Function to estimate angles between pairs of vectors (2023, comments)
 func_calc_angle_pcavars <- function(x, y){
@@ -234,6 +234,6 @@ plt_anglecorr_addRDMCLPC = ggplot(data=varAngleMelted_combined,
 
 plt_anglecorr_nonphy_total = plt_anglecorr_addRDMC + plt_anglecorr_addLPC + plt_anglecorr_addRDMCLPC + plot_layout(guides = "collect") & theme(legend.position='bottom', legend.title = element_blank())
 
-ggsave(plot = plt_anglecorr_nonphy_total, filename = "plt_anglecorr_nonphy_total.pdf", width = 8, height= 3.2)
+ggsave(plot = plt_anglecorr_nonphy_total, filename = "species-level-code/plt_anglecorr_nonphy_total.pdf", width = 8, height= 3.2)
 # ggsave(plot = plt_anglecorr_nonphy_total, filename = "plt_anglecorr_nonphy_total.png", width = 8, height= 3.2, dpi=300)
 

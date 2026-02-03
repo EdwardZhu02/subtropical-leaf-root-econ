@@ -138,4 +138,4 @@ traitDataIndv_spgfavg_log_ztransform = func_log_z_transform(traitDataIndv_spgfav
 save(traitDataIndv, #traitDataIndv_colcaption,
      traitDataIndv_spavg, traitDataIndv_spavg_log, traitDataIndv_spavg_log_ztransform,
      traitDataIndv_spgfavg, traitDataIndv_spgfavg_log, traitDataIndv_spgfavg_log_ztransform,
-     file = "traitDataFujian-normbysp-step1.RData")
+     file = "species-level-code/traitDataFujian-normbysp-step1.RData")

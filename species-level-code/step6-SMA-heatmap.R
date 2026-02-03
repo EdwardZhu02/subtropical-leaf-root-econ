@@ -6,7 +6,7 @@ library(ggthemes)
 library(pheatmap)
 library(reshape2) # for drawing heatmap using ggplot2
 
-load("traitDataFujian-spavg-phylo-step2.RData") # Updated dataset on 25/11-24
+load("species-level-code/traitDataFujian-spavg-phylo-step2.RData") # Updated dataset on 25/11-24
 
 # == Already done in preparation of the data, updated 7/11-24
 # # ------------------------------------------------------------------------------
@@ -104,7 +104,7 @@ plt_SMA_htmap_pvalue = ggplot(data = melted_pvalue_matrix, aes(Var2, Var1, fill 
     legend.position = c(0.6, 0.7),
     legend.direction = "horizontal")+
   guides(fill = guide_colorbar(barwidth = 7, barheight = 1, title.position = "top", title.hjust = 0.5))
-ggsave(plot=plt_SMA_htmap_pvalue, filename="plt_SMA_htmap_pvalue_RESLES.pdf", width=6.5, height=6.5)
+ggsave(plot=plt_SMA_htmap_pvalue, filename="species-level-code/plt_SMA_htmap_pvalue_RESLES.pdf", width=6.5, height=6.5)
 
 
 plt_SMA_htmap_rvalue = ggplot(data = melted_rvalue_matrix, aes(Var2, Var1, fill = value)) +
@@ -127,7 +127,7 @@ plt_SMA_htmap_rvalue = ggplot(data = melted_rvalue_matrix, aes(Var2, Var1, fill 
     legend.position = c(0.6, 0.7),
     legend.direction = "horizontal")+
   guides(fill = guide_colorbar(barwidth = 7, barheight = 1, title.position = "top", title.hjust = 0.5))
-ggsave(plot=plt_SMA_htmap_rvalue, filename="plt_SMA_htmap_rvalue_RESLES.pdf", width=6.5, height=6.5)
+ggsave(plot=plt_SMA_htmap_rvalue, filename="species-level-code/plt_SMA_htmap_rvalue_RESLES.pdf", width=6.5, height=6.5)
 
 # # Plot the heatmap (method 2: pheatmap)
 # #pdf("plt_PGLS_Prhtmap03.pdf", width = 7, height = 6.5) # original

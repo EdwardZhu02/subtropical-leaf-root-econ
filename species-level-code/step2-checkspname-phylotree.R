@@ -5,7 +5,7 @@ library(tidyr)
 # devtools::install_github("jinyizju/V.PhyloMaker2")
 library(V.PhyloMaker2) # phylo-tree construction
 
-load(file = "traitDataFujian-normbysp-step1.RData")
+load(file = "species-level-code/traitDataFujian-normbysp-step1.RData")
 
 # Use plantlist package to normalize species names
 # Perform round 1 checking
@@ -60,7 +60,7 @@ spTaxaNames_corrected = traitDataIndv_spavg_log %>% dplyr::select(SpeciesFullNam
 spTaxaNames_corrected = spTaxaNames_corrected %>% separate(speciesFullName_tosep, into = c("genus_name", "sp_name"), sep=" ")
 
 # Step2: Add family information ------------------------------------------------
-genusFamilyTable = read.table("Phylomaker_genus_family.csv", sep=",", header=T)
+genusFamilyTable = read.table("rawdata/Phylomaker_genus_family.csv", sep=",", header=T)
 spTaxaNames_withfam = spTaxaNames_corrected %>%
   left_join(genusFamilyTable, by = c("genus_name" = "Genus")) %>%
   dplyr::rename(family_name = Family) %>% 
@@ -118,5 +118,5 @@ save(traitDataIndv,
      traitDataIndv_spavg, traitDataIndv_spavg_log, traitDataIndv_spavg_log_ztransform,
      traitDataIndv_spgfavg, traitDataIndv_spgfavg_log, traitDataIndv_spgfavg_log_ztransform,
      spTaxaNames_withfam, phylotree_result, 
-     file = "traitDataFujian-spavg-phylo-step2.RData")
+     file = "species-level-code/traitDataFujian-spavg-phylo-step2.RData")
 

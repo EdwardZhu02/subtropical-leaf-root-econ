@@ -12,7 +12,7 @@ library(geiger) # compare taxa in data and tree
 library(treeplyr) # general phylogenetic analysis
 library(phytools) # general phylogenetic analysis, phyl.pca
 
-load("traitDataFujian-spavg-phylo-step2.RData")
+load("species-level-code/traitDataFujian-spavg-phylo-step2.RData")
 
 # Part 1: data preparation (non-phylo) -----------------------------------------
 # 
@@ -284,5 +284,5 @@ plt_END_RESLESorthog = ggplot(ENDdata_total_df_long_plt2, aes(x = comb_group,y =
   theme_classic() +
   theme(axis.title.x = element_blank(), legend.title = element_blank())
 
-ggsave(plot=plt_END_RESLESorthog, filename = "plt_END_RESLESorthog.pdf", width = 7, height = 3.5)
+ggsave(plot=plt_END_RESLESorthog, filename = "species-level-code/plt_END_RESLESorthog.pdf", width = 7, height = 3.5)
 #ggsave(plot=plt_END_RESLESorthog, filename = "plt_END_RESLESorthog.png", width = 6.5, height = 3, dpi=300)

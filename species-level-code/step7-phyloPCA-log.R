@@ -22,7 +22,7 @@ library(reshape2) # scree plot, stacked barplot
 # 
 # TODO: Updated 21/11-24, use original and perform binding in the latter script
 # Load: traitDataIndv, traitDataIndv_spavg, traitDataIndv_spavg_log, traitDataIndv_spavg_log_ztransform, spTaxaNames_withfam, phylotree_result
-load("traitDataFujian-spavg-phylo-step2.RData") 
+load("species-level-code/traitDataFujian-spavg-phylo-step2.RData") 
 
 # Part 1: combine raw data and tree --------------------------------------------
 # 
@@ -121,9 +121,9 @@ plt_ax23 = plt_phyloPCA_biplot_ax23 + plt_phyloPCA_contribplot_ax23 +
 
 # Combine the two plots side by side
 plt_ax12_ax23_combined = plot_grid(plt_ax12, plt_ax23, ncol = 1)
-ggsave(plot = plt_ax12_ax23_combined, filename = "plt_phyloPCA_ax123Combined_RLESLPCRDMC.pdf",
+ggsave(plot = plt_ax12_ax23_combined, filename = "species-level-code/plt_phyloPCA_ax123Combined_RLESLPCRDMC.pdf",
        width = 6, height = 8)
-ggsave(plot = plt_ax12_ax23_combined, filename = "plt_phyloPCA_ax123Combined_RLESLPCRDMC.png",
+ggsave(plot = plt_ax12_ax23_combined, filename = "species-level-code/plt_phyloPCA_ax123Combined_RLESLPCRDMC.png",
        width = 6, height = 8, dpi=300)
 
 # Scree plot to visualize contributions of different axes
@@ -132,56 +132,4 @@ phyloPCA.screeplot = fviz_screeplot(phyloPCA.results.prcomp, addlabels = TRUE, y
   labs(title="RES+LES(+LPC,RDMC)") + theme_classic()
 ggsave(filename = "plt_phyloPCA_screeplot-RESLESLPCRDMC.pdf", plot = phyloPCA.screeplot, width = 3, height = 3)
 ggsave(filename = "plt_phyloPCA_screeplot-RESLESLPCRDMC.png", plot = phyloPCA.screeplot, width = 3, height = 3, dpi=300)
-
-
-# Step 5: Compare with non-phylo PCA, grouped barplot --------------------------
-screeData_compare_RLES = data.frame(
-  Dimensions = c("1","2","3","4","5","6"),
-  NonPhylo = c(34.4,27.6,21.5,10,6.3,0.2),
-  Phylo = c(35,27,22.1,9.5,6.3,0.2))
-screeData_compare_RLESRDMC = data.frame(
-  Dimensions = c("1","2","3","4","5","6","7"),
-  NonPhylo = c(35.5,26.6,21.3,9.3,5.4,1.8,0.1),
-  Phylo = c(34.3,27.6,21.7,8.8,5.4,2,0.1))
-screeData_compare_RLESLPC = data.frame(
-  Dimensions = c("1","2","3","4","5","6","7"),
-  NonPhylo = c(32,27.6,21.2,9,7.2,2.8,0.1),
-  Phylo = c(32.7,27.2,21.1,9.1,6.8,3,0.1))
-screeData_compare_RLESLPCRDMC = data.frame(
-  Dimensions = c("1","2","3","4","5","6","7","8"),
-  NonPhylo = c(32.5,25.7,22.5,8.8,6.3,2.5,1.6,0.1),
-  Phylo = c(32.2,25,23.4,8.9,6.1,2.6,1.7,0.1))
-
-screeData_compare_touse = screeData_compare_RLES
-#screeData_compare_touse = screeData_compare_RLESLPC
-#screeData_compare_touse = screeData_compare_RLESRDMC
-#screeData_compare_touse = screeData_compare_RLESLPCRDMC
-screeData_compare_touse = melt(screeData_compare_touse,variable.name="Category",value.name = "ExplainedVariance")
-
-# Grouped bar plot
-plt_scree_compare = ggplot(screeData_compare_touse) +
-  geom_bar(aes(x=Dimensions, y=ExplainedVariance, fill=Category), color="black", # border
-           stat="identity", width=0.8, position="dodge") + 
-  
-  geom_point(aes(x=Dimensions, y=ExplainedVariance, color=Category), size=2, position=position_dodge(width = 0.6)) +
-  geom_line(aes(x=Dimensions, y=ExplainedVariance, color=Category, group = Category), linewidth=1, position=position_dodge(width = 0.6)) +
-  
-  scale_fill_manual(values = c("#7998AD","#C47070")) + # bar coloring
-  scale_color_manual(values = c("#000080","#B22222")) + # point and line coloring
-  
-  geom_text(aes(x = Dimensions, y = ExplainedVariance, group = Category, label = paste0(ExplainedVariance, "%")),
-            position = position_dodge(width = 0.6),size = 3.5,vjust = 0.8,hjust=-0.7,angle=90) + 
-  labs(title="RES+LES", y="Variance Explained (%)") + 
-  theme_classic() +
-  scale_y_continuous(limits = c(0, 45), expand = c(0, 0)) + # Removes the blank space
-  theme(legend.title = element_blank(), 
-        legend.position = c(1, 1),
-        legend.justification = c(1, 1)
-        # legend.background = element_rect(fill = "white", color = "black")
-        )
-
-ggsave(filename = "plt_PCAcompare_scree-RESLES.pdf", plot = plt_scree_compare, width = 3.9, height = 3.5)
-#ggsave(filename = "plt_PCAcompare_scree-RESLESLPC.pdf", plot = plt_scree_compare, width = 3.9, height = 3.5)
-#ggsave(filename = "plt_PCAcompare_scree-RESLESRDMC.pdf", plot = plt_scree_compare, width = 3.9, height = 3.5)
-#ggsave(filename = "plt_PCAcompare_scree-RESLESLPCRDMC.pdf", plot = plt_scree_compare, width = 3.9, height = 3.5)
 

@@ -12,7 +12,7 @@ library(geiger) # compare taxa in data and tree
 library(treeplyr) # general phylogenetic analysis
 library(phytools) # general phylogenetic analysis, phyl.pca
 
-load("traitDataFujian-spavg-phylo-step2.RData")
+load("species-level-code/traitDataFujian-spavg-phylo-step2.RData")
 
 ### Function to estimate angles between pairs of vectors (2023, comments)
 func_calc_angle_pcavars <- function(x, y){
@@ -287,6 +287,6 @@ plt_anglecorr_phy_RLESRDMCLPC = ggplot(data=varAngleMelted_combined,
 
 plt_anglecorr_phy_total = plt_anglecorr_phy_RLES + plt_anglecorr_phy_RLESRDMC + plt_anglecorr_phy_RLESLPC + plt_anglecorr_phy_RLESRDMCLPC + plot_layout(guides = "collect") & theme(legend.position='bottom', legend.title = element_blank())
 
-ggsave(plot = plt_anglecorr_phy_total, filename = "plt_anglecorr_phycomp_total.pdf", width = 5.5, height= 6)
+ggsave(plot = plt_anglecorr_phy_total, filename = "species-level-code/plt_anglecorr_phycomp_total.pdf", width = 5.5, height= 6)
 # ggsave(plot = plt_anglecorr_phy_total, filename = "plt_anglecorr_phycomp_total.png", width = 5.5, height= 6, dpi=300)
 
