@@ -83,6 +83,9 @@ traitDataPCA_touse = traitDataIndv_SelectedTraits_log # perform scaling later (l
 ## Leaf trait space (Figure 2)
 #traitName_touse = c("LMA","LNC","LPC","LCC","Ld13C","Rdark25P","Vcmax25","Asat","LA")
 
+# Markers only, leaf+root
+#traitName_touse = c("RTD","SRL","RD","RNC","LMA","LNC")
+
 # Markers and identified co-predictors, leaf+root (Figure 2)
 traitName_touse = c("RTD","SRL","RD","RNC","LMA","LNC","RDMC","SRR25","SRA","LPC")
 
@@ -99,7 +102,7 @@ nonphyloPCAData_numonly = traitDataPCA_touse %>% ungroup() %>%
   dplyr::mutate(SiteID = as.factor(SiteID)) %>%
   na.omit()
 
-# TODO: Added 27/12-24, concordant with angle calculation
+# Added 27/12-24, concordant with angle calculation
 # scale traits based on columns (mean=0, SD=1, same as z-transform) 
 nonphyloPCAData_numonly[, traitName_touse] = apply(nonphyloPCAData_numonly[, traitName_touse], 2, scale)
 # fix rownames
@@ -126,6 +129,28 @@ rotated_scores <- nonphyloPCAresult$ind$coord %*% varimax_result$rotmat
 nonphyloPCAresult_varimax_rotated <- nonphyloPCAresult
 nonphyloPCAresult_varimax_rotated$var$coord <- rotated_loadings
 nonphyloPCAresult_varimax_rotated$ind$coord <- rotated_scores  
+
+
+# TODO: change this for results
+# nonphyloPCAresult / nonphyloPCAresult_varimax_rotated
+nonphyloPCAresult_touse = nonphyloPCAresult_varimax_rotated
+
+
+# Loadings and eigenvalues
+loadings_mat = as.matrix(nonphyloPCAresult_touse$var$coord)
+loadings_full = loadings_mat[, , drop = FALSE]
+print(round(loadings_full, 4))
+
+eig = nonphyloPCAresult_touse$eig
+print(round(eig, 4))
+
+
+# communality as sum of squared loadings on retained axes
+#retained_axes = c(1,3) # RES for R-LES marker only
+retained_axes = c(1,2) # RES for R-LES marker + copredictor
+#retained_axes = c(1,2,3) # R-LES
+communalities = rowSums(loadings_mat[, retained_axes]^2)
+communalities %>% view()
 
 # ------------------------------------------------------------------------------
 # Scree plot: contributions of axes
@@ -211,14 +236,6 @@ plt_nonphyloPCA_biplot_ax23.varimax = fviz_pca_biplot_MODIFIED(
   addEllipses=T, palette = c("#547bb4", "#dd7c4f")) + # hilltop, valley
   #annotate("text", x = -2.5, y = 3.8, label=paste0("Top ", length(traitName_touse)-2), color = "black") + 
   labs(title = "") + theme_classic() + theme(legend.direction = 'horizontal', legend.position = 'none', legend.title = element_blank()) + xlim(-5, 5) + ylim(-5, 5)
-
-
-
-# TODO: 25-02-01, extract contrib and cos2 in numbers
-#plt_nonphyloPCA_contribplot_ax12[["data"]] %>% view()
-#plt_nonphyloPCA_contribplot_ax23[["data"]] %>% view()
-nonphyloPCAresult_varimax_rotated[["var"]][["coord"]] %>% view()
-
 
 # Make the output plot
 plt_ax123_bi_varimax = plt_nonphyloPCA_biplot_ax12.varimax + plt_nonphyloPCA_biplot_ax23.varimax +
