@@ -78,10 +78,10 @@ traitDataPCA_touse = traitDataIndv_SelectedTraits_log
 #traitName_touse = c("RTD","SRL","RD","RNC","RDMC","SRR25","SRA","RPC","RCC")
 
 ## Leaf trait space (Figure 2)
-traitName_touse = c("LMA","LNC","LPC","LCC","Ld13C","Rdark25P","Vcmax25","Asat","LA")
+#traitName_touse = c("LMA","LNC","LPC","LCC","Ld13C","Rdark25P","Vcmax25","Asat","LA")
 
 # Markers and identified co-predictors, leaf+root (Figure 2)
-#traitName_touse = c("RTD","SRL","RD","RNC","LMA","LNC","RDMC","SRR25","SRA","LPC")
+traitName_touse = c("RTD","SRL","RD","RNC","LMA","LNC","RDMC","SRR25","SRA","LPC")
 
 # Create unique ID for individuals
 traitDataPCA_touse = traitDataPCA_touse %>% mutate(
@@ -94,16 +94,17 @@ indv_data <- traitDataPCA_touse %>% ungroup() %>%
 	dplyr::mutate(SiteID = as.factor(SiteID)) %>%
 	tidyr::drop_na(all_of(traitName_touse))
 
-# Species means (equal weight per species)
+# Species means by site (equal weight per species-site)
 spmean_data <- indv_data %>%
-	dplyr::group_by(SpeciesFullName) %>%
-	dplyr::summarise(across(all_of(traitName_touse), ~ mean(.x, na.rm = TRUE)), .groups = "drop") %>%
-	tidyr::drop_na(all_of(traitName_touse))
+  dplyr::group_by(SpeciesFullName, SiteID) %>%
+  dplyr::summarise(across(all_of(traitName_touse), ~ mean(.x, na.rm = TRUE)), .groups = "drop") %>%
+  tidyr::drop_na(all_of(traitName_touse)) %>%
+  dplyr::mutate(SpSiteID = paste(gsub(" ", "_", SpeciesFullName), SiteID, sep = "-"))
 
 spmean_matrix <- spmean_data %>% dplyr::select(all_of(traitName_touse))
 indv_matrix <- indv_data %>% dplyr::select(all_of(traitName_touse))
 
-rownames(spmean_matrix) <- spmean_data$SpeciesFullName
+rownames(spmean_matrix) <- spmean_data$SpSiteID
 rownames(indv_matrix) <- indv_data$PCAIdentifier_spgf
 
 #-----------------------------------------------------------
@@ -215,7 +216,7 @@ plt_spmean_proj_biplots <- plt_indv_proj_ax12 + plt_indv_proj_ax23 +
 plt_spmean_proj_biplots_varimax <- plt_indv_proj_ax12_varimax + plt_indv_proj_ax23_varimax +
 	plot_layout(guides = "collect") & theme(legend.position='bottom')
 
-ggsave(plot = plt_spmean_proj_biplots, filename = "revision-code/step5-spmean-indvproj-bi-LES.pdf",
+ggsave(plot = plt_spmean_proj_biplots, filename = "revision-code/step5-spmean-indvproj-bi-RLES.pdf",
 			 width = 5.8, height = 3.6)
-ggsave(plot = plt_spmean_proj_biplots_varimax, filename = "revision-code/step5-spmean-indvproj-bi-varimax-LES.pdf",
+ggsave(plot = plt_spmean_proj_biplots_varimax, filename = "revision-code/step5-spmean-indvproj-bi-varimax-RLES.pdf",
 			 width = 5.8, height = 3.6)
