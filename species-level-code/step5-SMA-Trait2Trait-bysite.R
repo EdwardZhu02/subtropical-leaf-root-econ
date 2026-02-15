@@ -115,17 +115,97 @@ run_and_plot_sma <- function(data, x_var, y_var, label_text) {
   return(p)
 }
 
+# Pearson correlation stats for each site
+get_cor_stats <- function(data, x_var, y_var, site_label, site_filter = NULL) {
+  data_sub = data
+  if(!is.null(site_filter)) {
+    data_sub = data_sub %>% filter(SiteID == site_filter)
+  }
+  data_sub = data_sub %>% filter(!is.na(.data[[x_var]]) & !is.na(.data[[y_var]]))
+  n_obs = nrow(data_sub)
+  if(n_obs > 2) {
+    ct = cor.test(data_sub[[x_var]], data_sub[[y_var]], method = "pearson")
+    r_val = as.numeric(ct$estimate)
+    p_val = as.numeric(ct$p.value)
+  } else {
+    r_val = NA_real_
+    p_val = NA_real_
+  }
+  tibble(
+    site = site_label,
+    n = n_obs,
+    pearson_r = r_val,
+    p_value = p_val
+  )
+}
+
 # Run loop
 plot_list = list()
+stats_list = list()
 
 for(i in 1:nrow(trait_pairs)) {
   pair = trait_pairs[i,]
   p = run_and_plot_sma(traitData_touse, pair$x, pair$y, pair$label)
   plot_list[[i]] = p
+
+  stats_list[[i]] = bind_rows(
+    get_cor_stats(traitData_touse, pair$x, pair$y, "total"),
+    get_cor_stats(traitData_touse, pair$x, pair$y, "hilltop", "hilltop"),
+    get_cor_stats(traitData_touse, pair$x, pair$y, "valley", "valley")
+  ) %>%
+    mutate(
+      pair_id = pair$pair_id,
+      x = pair$x,
+      y = pair$y,
+      label = pair$label
+    )
   
   # Save individual plots
   ggsave(plot = p, filename = paste0("species-level-code/smaplt_bysite_", pair$pair_id, ".pdf"), width = 2.8, height = 2.8)
 }
+
+cor_stats = bind_rows(stats_list) %>%
+  group_by(site) %>%
+  mutate(p_adjusted = p.adjust(p_value, method = "fdr")) %>%
+  ungroup()
+
+write_csv(cor_stats, "species-level-code/step5-sma_spmean_bysite_stats.csv")
+
+# ------------------------------------------------------------------------------
+# Individual-level SMA by site
+# ------------------------------------------------------------------------------
+
+traitData_indv_touse = func_log_transform(traitDataIndv_SelectedTraits)
+
+indv_plot_list = list()
+indv_stats_list = list()
+
+for(i in 1:nrow(trait_pairs)) {
+  pair = trait_pairs[i,]
+  p_indv = run_and_plot_sma(traitData_indv_touse, pair$x, pair$y, paste0(pair$label, " (indv)"))
+  indv_plot_list[[i]] = p_indv
+
+  indv_stats_list[[i]] = bind_rows(
+    get_cor_stats(traitData_indv_touse, pair$x, pair$y, "total"),
+    get_cor_stats(traitData_indv_touse, pair$x, pair$y, "hilltop", "hilltop"),
+    get_cor_stats(traitData_indv_touse, pair$x, pair$y, "valley", "valley")
+  ) %>%
+    mutate(
+      pair_id = pair$pair_id,
+      x = pair$x,
+      y = pair$y,
+      label = pair$label
+    )
+
+  ggsave(plot = p_indv, filename = paste0("individual-level-code/smaplt_indv_bysite_", pair$pair_id, ".pdf"), width = 2.8, height = 2.8)
+}
+
+cor_stats_indv = bind_rows(indv_stats_list) %>%
+  group_by(site) %>%
+  mutate(p_adjusted = p.adjust(p_value, method = "fdr")) %>%
+  ungroup()
+
+write_csv(cor_stats_indv, "individual-level-code/step5-sma_indv_bysite_stats.csv")
 
 # Combine all into one
 # combined_plot = wrap_plots(plot_list, ncol = 3)

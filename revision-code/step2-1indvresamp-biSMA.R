@@ -120,16 +120,16 @@ for (i in seq_len(n_iter)) {
 resampling_stats_df = dplyr::bind_rows(resampling_stats)
 
 # adjP per iteration, all trait pairs (not used here)
-# resampling_stats_df = resampling_stats_df %>%
-# 	group_by(iteration) %>%
-# 	mutate(adjP = p.adjust(P, method = "fdr")) %>% 
-# 	ungroup()
+resampling_stats_df = resampling_stats_df %>%
+	group_by(iteration) %>%
+	mutate(adjP_pair = p.adjust(P, method = "fdr")) %>%
+	ungroup()
 
 # adjP per iteration per trait pair
-resampling_stats_df = resampling_stats_df %>%
-  group_by(iteration, pair_id, site) %>%
-  mutate(adjP_pair = p.adjust(P, method = "fdr")) %>%
-  ungroup()
+# resampling_stats_df = resampling_stats_df %>%
+#   group_by(iteration, pair_id, site) %>%
+#   mutate(adjP_pair = p.adjust(P, method = "fdr")) %>%
+#   ungroup()
 
 ### SUMMARY: MEAN AND 5%/95% CI ###
 summary_stats = resampling_stats_df %>%

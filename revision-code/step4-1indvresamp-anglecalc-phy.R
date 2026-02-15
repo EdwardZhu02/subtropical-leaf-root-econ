@@ -188,13 +188,13 @@ angle_group_iter = angle_results_raw %>%
 	group_by(iteration, method, trait_set, pair_annotation) %>%
 	summarise(mean_angle = mean(angle, na.rm = TRUE), .groups = "drop")
 
-angle_group_summary = angle_group_iter %>%
+angle_group_summary = angle_results_raw %>%
 	group_by(method, trait_set, pair_annotation) %>%
 	summarise(
-		mean_angle = mean(mean_angle, na.rm = TRUE),
-		CI_5 = quantile(mean_angle, 0.05, na.rm = TRUE),
-		CI_95 = quantile(mean_angle, 0.95, na.rm = TRUE),
-		n = sum(!is.na(mean_angle)),
+		mean_angle = mean(angle, na.rm = TRUE),
+		CI_5 = quantile(angle, 0.05, na.rm = TRUE),
+		CI_95 = quantile(angle, 0.95, na.rm = TRUE),
+		n = n(),
 		.groups = "drop"
 	)
 
