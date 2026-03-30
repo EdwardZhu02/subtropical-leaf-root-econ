@@ -148,7 +148,7 @@ smaplt.LNC_LMA = ggplot(smaplt_total_data, aes(x=LMA, y=LNC)) +
   scale_color_manual(values = c("#EECA40", "#7998AD", "#F07673")) + 
   annotate("text", x = 0.008, y = 1.18, label = model.sma.LNC_LMA_annotlabel, hjust = 0, vjust = 1, size = 3.2)
 
-ggsave(plot = smaplt.LNC_LMA, filename = "individual-level-code/Ind_sma.LNC_LMA.pdf", width = 2.6, height = 2.6)
+suppressWarnings(ggsave(plot = smaplt.LNC_LMA, filename = "individual-level-code/Ind_sma.LNC_LMA.pdf", width = 2.6, height = 2.6))
 
 # ------------------------------------------------------------------------------
 # PART 2: RES collaboration (RD-SRL)
@@ -271,7 +271,7 @@ smaplt.RD_SRL = ggplot(smaplt_total_data, aes(x=SRL, y=RD)) +
   scale_color_manual(values = c("#EECA40", "#7998AD", "#F07673")) +
   annotate("text", x = 3.6, y = 0.53, label = model.sma.RD_SRL_annotlabel, hjust = 0, vjust = 1, size = 3.2)
 
-ggsave(plot = smaplt.RD_SRL, filename = "individual-level-code/Ind_sma.RD_SRL.pdf", width = 2.6, height = 2.6)
+suppressWarnings(ggsave(plot = smaplt.RD_SRL, filename = "individual-level-code/Ind_sma.RD_SRL.pdf", width = 2.6, height = 2.6))
 
 # ------------------------------------------------------------------------------
 # PART 3: RES conservation (RNC-RTD)
@@ -394,7 +394,7 @@ smaplt.RNC_RTD = ggplot(smaplt_total_data, aes(x=RTD, y=RNC)) +
   scale_color_manual(values = c("#EECA40", "#7998AD", "#F07673")) +
   annotate("text", x = 0.165, y = 1.48, label = model.sma.RNC_RTD_annotlabel, hjust = 0, vjust = 1, size = 3.2)
 
-ggsave(plot = smaplt.RNC_RTD, filename = "individual-level-code/Ind_sma.RNC_RTD.pdf", width = 2.6, height = 2.6)
+suppressWarnings(ggsave(plot = smaplt.RNC_RTD, filename = "individual-level-code/Ind_sma.RNC_RTD.pdf", width = 2.6, height = 2.6))
 
 
 # ------------------------------------------------------------------------------
@@ -518,7 +518,7 @@ smaplt.RDMC_RTD = ggplot(smaplt_total_data, aes(x=RTD, y=RDMC)) +
   scale_color_manual(values = c("#EECA40", "#7998AD", "#F07673")) +
   annotate("text", x = 0.05, y = 0.42, label = model.sma.RDMC_RTD_annotlabel, hjust = 0, vjust = 1, size = 3.2)
 
-ggsave(plot = smaplt.RDMC_RTD, filename = "individual-level-code/Ind_sma.RDMC_RTD.pdf", width = 2.6, height = 2.6)
+suppressWarnings(ggsave(plot = smaplt.RDMC_RTD, filename = "individual-level-code/Ind_sma.RDMC_RTD.pdf", width = 2.6, height = 2.6))
 
 
 # ------------------------------------------------------------------------------
@@ -642,7 +642,7 @@ smaplt.RDMC_RNC = ggplot(smaplt_total_data, aes(x=RNC, y=RDMC)) +
   scale_color_manual(values = c("#EECA40", "#7998AD", "#F07673")) +
   annotate("text", x = 0.87, y = 0.335, label = model.sma.RDMC_RNC_annotlabel, hjust = 0, vjust = 1, size = 3.2)
 
-ggsave(plot = smaplt.RDMC_RNC, filename = "individual-level-code/Ind_sma.RDMC_RNC.pdf", width = 2.6, height = 2.6)
+suppressWarnings(ggsave(plot = smaplt.RDMC_RNC, filename = "individual-level-code/Ind_sma.RDMC_RNC.pdf", width = 2.6, height = 2.6))
 
 
 # ------------------------------------------------------------------------------
@@ -766,7 +766,7 @@ smaplt.LNC_LPC = ggplot(smaplt_total_data, aes(x=LPC, y=LNC)) +
   scale_color_manual(values = c("#EECA40", "#7998AD", "#F07673")) +
   annotate("text", x = 0.37, y = 1.35, label = model.sma.LNC_LPC_annotlabel, hjust = 0, vjust = 1, size = 3.2)
 
-ggsave(plot = smaplt.LNC_LPC, filename = "individual-level-code/Ind_sma.LNC_LPC.pdf", width = 2.6, height = 2.6)
+suppressWarnings(ggsave(plot = smaplt.LNC_LPC, filename = "individual-level-code/Ind_sma.LNC_LPC.pdf", width = 2.6, height = 2.6))
 
 
 # ------------------------------------------------------------------------------
@@ -890,7 +890,7 @@ smaplt.LMA_LPC = ggplot(smaplt_total_data, aes(x=LPC, y=LMA)) +
   scale_color_manual(values = c("#EECA40", "#7998AD", "#F07673")) +
   annotate("text", x = 0.52, y = 0.016, label = model.sma.LMA_LPC_annotlabel, hjust = 0, vjust = 1, size = 3.2)
 
-ggsave(plot = smaplt.LMA_LPC, filename = "individual-level-code/Ind_sma.LMA_LPC.pdf", width = 2.6, height = 2.6)
+suppressWarnings(ggsave(plot = smaplt.LMA_LPC, filename = "individual-level-code/Ind_sma.LMA_LPC.pdf", width = 2.6, height = 2.6))
 
 
 # (ADDED 250628): Rr25-Rdark25P ------------------------------------------------------
@@ -1013,7 +1013,7 @@ smaplt.SRR25_Rdark25P = ggplot(smaplt_total_data, aes(x=Rdark25P, y=SRR25)) +
   scale_color_manual(values = c("#EECA40", "#7998AD", "#F07673")) +
   annotate("text", x = 0.4, y = 4.5, label = model.sma.SRR25_Rdark25P_annotlabel, hjust = 0, vjust = 1, size = 3.2)
 
-ggsave(plot = smaplt.SRR25_Rdark25P, filename = "individual-level-code/Ind_sma.SRR25_Rdark25P.pdf", width = 2.6, height = 2.6)
+suppressWarnings(ggsave(plot = smaplt.SRR25_Rdark25P, filename = "individual-level-code/Ind_sma.SRR25_Rdark25P.pdf", width = 2.6, height = 2.6))
 
 
 # (ADDED 250628): Rr25-RNC ------------------------------------------------------
@@ -1136,6 +1136,6 @@ smaplt.LNC_RNC = ggplot(smaplt_total_data, aes(x=RNC, y=LNC)) +
   scale_color_manual(values = c("#EECA40", "#7998AD", "#F07673")) +
   annotate("text", x = 0.4, y = 4.5, label = model.sma.LNC_RNC_annotlabel, hjust = 0, vjust = 1, size = 3.2)
 
-ggsave(plot = smaplt.LNC_RNC, filename = "individual-level-code/Ind_sma.LNC_RNC.pdf", width = 2.6, height = 2.6)
+suppressWarnings(ggsave(plot = smaplt.LNC_RNC, filename = "individual-level-code/Ind_sma.LNC_RNC.pdf", width = 2.6, height = 2.6))
 
 
