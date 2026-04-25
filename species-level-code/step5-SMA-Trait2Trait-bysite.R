@@ -44,7 +44,7 @@ trait_pairs = tibble::tribble(
   "RNC_RTD", "RTD", "RNC", "RES conservation (RNC-RTD)",
   "Rdark25P_SRR25", "SRR25", "Rdark25P", "Rd25-Rr25",
   "RNC_LNC", "LNC", "RNC", "RNC-LNC",
-  "SRL_SLA", "SLA", "SRL", "SRL-SLA"
+  "SRL_LMA", "LMA", "SRL", "SRL-LMA"
 )
 
 # Function to perform SMA and Plot

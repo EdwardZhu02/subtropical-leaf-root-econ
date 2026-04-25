@@ -4,47 +4,7 @@ library(dplyr)
 library(tidyr)
 library(V.PhyloMaker2) # devtools::install_github("jinyizju/V.PhyloMaker2")
 
-load(file = "species-level-code/traitDataFujian-normbysp-step1.RData")
-
-# Use plantlist package to normalize species names
-# Perform round 1 checking
-# ------------------------------------------------------------------------------
-# devtools::install_github("helixcn/plantlist", build_vignettes = TRUE)
-# library(plantlist) # species check
-# spTaxaNames = traitDataIndv_normalized %>% dplyr::select(SpeciesFullName) %>% distinct() %>%
-#   dplyr::rename(speciesFullName = SpeciesFullName) %>%
-#   dplyr::mutate(
-#     speciesCheckResult1 = "",
-#     speciesFullNameAutoFix1 = "",  # for 'unresolved' or 'synonym' species, replace to accepted species
-#   )
-#
-# for (rowidx in 1:nrow(spTaxaNames)) {
-#   indv_spname = spTaxaNames$speciesFullName[rowidx]
-#   spname_check_result = status(indv_spname, exact=T)
-# 
-#   if ( !is.na(spname_check_result[1,3]) ){
-# 
-#     if ( spname_check_result[1,3] == "Accepted" ) {
-#       spTaxaNames$speciesCheckResult1[rowidx] = "PASS-accepted"
-# 
-#     } else if ( spname_check_result[1,3] %in% c("Unresolved", "Synonym") ) {
-#       spTaxaNames$speciesFullNameAutoFix1[rowidx] = spname_check_result[1,5]
-#       spTaxaNames$speciesCheckResult1[rowidx] = "PASS-autofixed"
-#       print(paste0("Autofixed: ", indv_spname, " -> ", spname_check_result[1,5]))
-# 
-#     } else {
-#       spTaxaNames$speciesCheckResult1[rowidx] = "FAIL"
-#       print(paste0("Failed! original name case not in \'synonym\' or \'unresolved\' ", indv_spname))
-#     }
-# 
-#   } else {
-#     spTaxaNames$speciesCheckResult1[rowidx] = "FAIL"
-#     print(paste0("Failed! no match: ", indv_spname))
-#   }
-# 
-#   # break
-# }
-# ------------------------------------------------------------------------------
+load(file = "outdata/traitDataFujian-phylotree-step1.RData")
 
 # Step1: Curate spTaxaNames and seperate into genus and species names ----------
 # 1. Camphora parthenoxylon -> Cinnamomum porrectum
@@ -117,5 +77,5 @@ save(traitDataIndv,
      traitDataIndv_spavg, traitDataIndv_spavg_log, traitDataIndv_spavg_log_ztransform,
      traitDataIndv_spgfavg, traitDataIndv_spgfavg_log, traitDataIndv_spgfavg_log_ztransform,
      spTaxaNames_withfam, phylotree_result, 
-     file = "species-level-code/traitDataFujian-spavg-phylo-step2.RData")
+     file = "outdata/traitDataFujian-SpAvg-phylo-step2.RData")
 

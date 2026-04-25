@@ -19,13 +19,13 @@ n_iter = 200
 set.seed(1)
 
 trait_pairs = tibble::tribble(
-	~pair_id, ~x, ~y, ~label,
-	"LNC_LMA", "LMA", "LNC", "LES (LNC-LMA)",
-	"RD_SRL", "SRL", "RD", "RES collaboration (RD-SRL)",
-	"RNC_RTD", "RTD", "RNC", "RES conservation (RNC-RTD)",
-	"Rdark25P_SRR25", "SRR25", "Rdark25P", "Rd25-Rr25",
-	"RNC_LNC", "LNC", "RNC", "RNC-LNC",
-	"SRL_SLA", "SLA", "SRL", "SRL-SLA"
+  ~pair_id, ~x, ~y, ~label,
+  "LNC_LMA", "LMA", "LNC", "LES (LNC-LMA)",
+  "RD_SRL", "SRL", "RD", "RES collaboration (RD-SRL)",
+  "RNC_RTD", "RTD", "RNC", "RES conservation (RNC-RTD)",
+  "Rdark25P_SRR25", "SRR25", "Rdark25P", "Rd25-Rr25",
+  "RNC_LNC", "LNC", "RNC", "RNC-LNC",
+  "SRL_LMA", "LMA", "SRL", "SRL-LMA"
 )
 
 sample_one_ind_per_sp_site <- function(data, trait_cols) {
